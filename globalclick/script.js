@@ -77,6 +77,7 @@ function updateLeaderboard() {
 function handleButtonClick() {
   totalClicks++;
   leaderboard[username] = (leaderboard[username] || 0) + 1;
+
   updateTotalClicks();
   updateUserClicks();
   updateLeaderboard();
