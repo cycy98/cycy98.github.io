@@ -33,7 +33,7 @@ function updateLeaderboard() {
   });
 }
 // Event listener for the click button
-function handleClick() {
+function handleButton() {
   totalClicks++;
   leaderboard[username] = (leaderboard[username] || 0) + 1;
   updateTotalClicks();
