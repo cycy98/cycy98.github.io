@@ -1,17 +1,17 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const tabButtons = document.querySelectorAll(".tab-button");
-    const tabPanes = document.querySelectorAll(".tab-pane");
+// script.js
+function showTab(tabId, button) {
+    // Remove the active class from all buttons
+    const buttons = document.querySelectorAll('.tab-button');
+    buttons.forEach(btn => btn.classList.remove('active'));
 
-    tabButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            // Remove active class from all buttons and panes
-            tabButtons.forEach(btn => btn.classList.remove("active"));
-            tabPanes.forEach(pane => pane.classList.remove("active"));
+    // Remove the active class from all tab panes
+    const panes = document.querySelectorAll('.tab-pane');
+    panes.forEach(pane => pane.classList.remove('active'));
 
-            // Add active class to the clicked button and corresponding pane
-            const targetTab = button.getAttribute("data-tab");
-            button.classList.add("active");
-            document.getElementById(targetTab).classList.add("active");
-        });
-    });
-});
+    // Add the active class to the clicked button
+    button.classList.add('active');
+
+    // Add the active class to the corresponding tab pane
+    const activePane = document.getElementById(tabId);
+    activePane.classList.add('active');
+}
