@@ -16,14 +16,14 @@ body {
 .tab-button {
     padding: 10px 20px;
     border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: #111111;
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s;
 }
 
 .tab-button.active {
-    background-color: #fff;
+    background-color: #000;
     border-bottom: 2px solid #007BFF;
 }
 
@@ -32,9 +32,9 @@ body {
 }
 
 .tab-content {
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     padding: 20px;
-    background-color: #fff;
+    background-color: #000;
 }
 
 .tab-pane {
