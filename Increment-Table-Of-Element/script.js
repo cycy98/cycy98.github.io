@@ -15,3 +15,52 @@ function showTab(tabId, button) {
     const activePane = document.getElementById(tabId);
     activePane.classList.add('active');
 }
+// Game state
+let _1H = 0;
+let _1HPerSecond = 0;
+let generatorCount = 0;
+let generatorCost = 10;
+
+// DOM elements
+const _1HCountDisplay = document.getElementById('_1H-count');
+const generatorCountDisplay = document.getElementById('_1H-count');
+const generatorCostDisplay = document.getElementById('_1H-cost');
+
+const manualAddButton = document.getElementById('manual-add');
+const buyGeneratorButton = document.getElementById('buy-generator');
+
+// Function to update the resource display
+function updateDisplay() {
+    _1HCountDisplay.textContent = _1H.toFixed(1);
+    generatorCountDisplay.textContent = generatorCount;
+    generatorCostDisplay.textContent = generatorCost;
+}
+
+// Add gold manually
+manualAddButton.addEventListener('click', () => {
+    _1H += 1;
+    updateDisplay();
+});
+
+// Buy a generator
+buyGeneratorButton.addEventListener('click', () => {
+    if (_1H >= generatorCost) {
+        _1H -= generatorCost;
+        generatorCount += 1;
+        _1HPerSecond += 1; // Each generator adds 1 gold per second
+        generatorCost = Math.ceil(generatorCost * 1.15); // Increment cost
+        updateDisplay();
+    }
+});
+
+// Generate gold over time
+function generateGold() {
+    _1H += _1H / 10; // Increment gold every 100ms
+    updateDisplay();
+}
+
+// Start generating gold every 100ms
+setInterval(generateGold, 100);
+
+// Initial display update
+updateDisplay();
