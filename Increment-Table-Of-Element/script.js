@@ -54,13 +54,13 @@ buyGeneratorButton.addEventListener('click', () => {
 });
 
 // Generate gold over time
-function generateGold() {
+function generate1H() {
     _1H += _1H / 10; // Increment gold every 100ms
     updateDisplay();
 }
 
 // Start generating gold every 100ms
-setInterval(generateGold, 100);
+setInterval(generate1H, 100);
 
 // Initial display update
 updateDisplay();
