@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte à rebours vers 2026</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20%;
+            background-color: #f0f8ff;
+            color: #333;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .celebration {
+            background-color: #ff69b4;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compte à rebours vers 2026</h1>
+    <div class="timer" id="timer">Chargement...</div>
+
+    <script>
+        let intervalId;
+
+        function updateTimer() {
+            const now = new Date();
+            const year2026 = new Date('January 1, 2026 00:00:00');
+            const diffInMilliseconds = year2026 - now;
+            const diffInSeconds = Math.floor(diffInMilliseconds / 1000);
+
+            if (diffInSeconds >= 0) {
+                if (diffInSeconds <= 10) {
+                    // Show milliseconds when less than 10 seconds remaining
+                    const milliseconds = diffInMilliseconds % 1000;
+                    const secondsText = diffInSeconds === 1 ? 'seconde' : 'secondes';
+                    document.getElementById('timer').textContent = `${diffInSeconds}.${milliseconds.toString().padStart(3, '0')} ${secondsText} restantes avant 2025`;
+                } else {
+                    // Regular display for more than 10 seconds
+                    const secondsText = diffInSeconds === 1 ? 'seconde' : 'secondes';
+                    document.getElementById('timer').textContent = `${diffInSeconds} ${secondsText} restantes avant 2025`;
+                }
+            } else {
+                document.getElementById('timer').textContent = "Bonne année 2026 !";
+                document.body.classList.add('celebration');
+                clearInterval(intervalId);
+            }
+        }
+
+        function startTimer() {
+            intervalId = setInterval(() => {
+                const now = new Date();
+                const year2026 = new Date('January 1, 2026 00:00:00');
+                const diffInMilliseconds = year2026 - now;
+
+                if (diffInMilliseconds <= 10000) {
+                    clearInterval(intervalId); // Clear the 1-second interval
+                    intervalId = setInterval(updateTimer, 40); // Start the high-precision timer
+                }
+
+                updateTimer();
+            }, 1000);
+        }
+
+        // Start the timer
+        startTimer();
+
+        // Initialize the timer immediately
+        updateTimer();
+    </script>
+</body>
+</html>
