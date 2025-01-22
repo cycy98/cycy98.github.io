@@ -21,10 +21,6 @@ let hydrogen1 = 10; // Start with 10 Hydrogen1
 let hydrogen2 = 0;
 let hydrogen3 = 0;
 
-let hydrogen2Unlocked = false; // 2H appears only after the first one is generated
-let hydrogen3Unlocked = false; // 3H appears only after the first one is generated
-
-const achievements = [];
 const generators = [
     { name: "Basic Generator", cost: 10, production: 1, count: 0 },
     { name: "Advanced Generator", cost: 100, production: 10, count: 0 },
@@ -41,8 +37,8 @@ const achievementsList = document.getElementById('achievements-list');
 // Function to update the resource display
 function updateDisplay() {
     hydrogen1CountDisplay.textContent = hydrogen1.toFixed(1);
-    hydrogen2CountDisplay.textContent = hydrogen2.toFixed(1);
-    hydrogen3CountDisplay.textContent = hydrogen3.toFixed(1);
+    hydrogen2CountDisplay.textContent = hydrogen2 > 0 ? hydrogen2.toFixed(1) : '0'; // Show 0 if none
+    hydrogen3CountDisplay.textContent = hydrogen3 > 0 ? hydrogen3.toFixed(1) : '0'; // Show 0 if none
 
     generatorTable.innerHTML = generators
         .map((gen, index) => `
@@ -85,7 +81,7 @@ function buyGenerator(index) {
     }
 }
 
-// Function to produce Hydrogen1 and unlock isotopes
+// Function to produce Hydrogen and Isotopes (Hydrogen2 and Hydrogen3)
 function produceHydrogen() {
     // Calculate total production from all generators
     const totalProduction = generators.reduce((sum, gen) => sum + gen.production * gen.count, 0);
@@ -93,25 +89,15 @@ function produceHydrogen() {
     // Add Hydrogen1
     hydrogen1 += totalProduction / 10;
 
-    // Unlock isotopes
-    if (hydrogen2Unlocked || hydrogen1 >= 1) {
+    // Generate isotopes based on Hydrogen1 production
+    if (hydrogen1 >= 1) {
         const isotopeChance = Math.random();
         if (isotopeChance < 0.1) {
             hydrogen1 -= 1;
-            hydrogen2 += 1;
+            hydrogen2 += 1; // Produce Deuterium (Hydrogen2)
         } else if (isotopeChance < 0.05) {
             hydrogen1 -= 1;
-            hydrogen3 += 1;
-        }
-
-        if (hydrogen2 > 0 && !hydrogen2Unlocked) {
-            hydrogen2Unlocked = true;
-            addAchievement("Discovered Hydrogen2 (Deuterium)");
-        }
-
-        if (hydrogen3 > 0 && !hydrogen3Unlocked) {
-            hydrogen3Unlocked = true;
-            addAchievement("Discovered Hydrogen3 (Tritium)");
+            hydrogen3 += 1; // Produce Tritium (Hydrogen3)
         }
     }
 
