@@ -27,6 +27,9 @@ const generators = [
     { name: "Fusion Generator", cost: 1000, production: 100, count: 0 },
 ];
 
+// ACHIEVEMENTS
+let achievements = []; // Initialize achievements as an empty array
+
 // DOM ELEMENTS
 const hydrogen1CountDisplay = document.getElementById('hydrogen1-count');
 const hydrogen2CountDisplay = document.getElementById('hydrogen2-count');
