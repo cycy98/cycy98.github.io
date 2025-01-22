@@ -3,53 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydrogen Generator</title>
-    <link rel="stylesheet" href="style.css"> <!-- Make sure this is the correct path -->
+    <title>Incremental Game</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
 </head>
-
 <body>
     <div class="tabs">
-        <button class="tab-button" onclick="openTab('generator')">Hydrogen Generator</button>
-        <button class="tab-button" onclick="openTab('achievements')">Achievements</button>
-        <button class="tab-button" onclick="openTab('tab3')">Tab 3</button>
+        <button onclick="openTab('generator')">Generators</button>
+        <button onclick="openTab('fusion')">Fusion</button>
+        <button onclick="openTab('achievements')">Achievements</button>
     </div>
 
+    <!-- Generators Tab -->
     <div id="generator" class="tab-content">
-        <h2>Hydrogen Generator</h2>
-
-        <p>Hydrogen1: <span id="hydrogen1-count">10</span></p>
-        <p>Hydrogen2: <span id="hydrogen2-count">0</span></p>
-        <p>Hydrogen3: <span id="hydrogen3-count">0</span></p>
-
-        <h3>Generators</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Generator Type</th>
-                    <th>Cost (Hydrogen1)</th>
-                    <th>Production (Hydrogen1/s)</th>
-                    <th>Count</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="generator-table">
-                <!-- Rows for generators will be dynamically inserted here -->
-            </tbody>
-        </table>
+        <h2>Hydrogen Generators</h2>
+        <table id="generator-table"></table>
     </div>
 
+    <!-- Fusion Tab -->
+    <div id="fusion" class="tab-content">
+        <h2>Fusion Reactor</h2>
+        <p>Cost: <span id="fusion-cost">5000</span> Hydrogen1</p>
+        <p id="fusion-status"></p>
+        <button onclick="buyFusionReactor()">Buy Fusion Reactor</button>
+    </div>
+
+    <!-- Achievements Tab -->
     <div id="achievements" class="tab-content">
-        <h2>Achievements</h2> <!-- Title for achievements -->
+        <h2>Achievements</h2>
         <ul id="achievements-list"></ul>
         <div id="achievement-popup" class="popup"></div>
     </div>
 
-
-    <div id="tab3" class="tab-content">
-        <h2>Tab 3</h2>
-        <p>Content for Tab 3.</p>
+    <!-- Import/Export Buttons -->
+    <div>
+        <button onclick="exportGameState()">Export Game</button>
+        <input type="file" id="file-input" onchange="importGameState(this)" />
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Link to your JS file -->
 </body>
 </html>
