@@ -18,7 +18,7 @@ function showTab(tabId, button) {
 // Game state
 let _1H = 0;
 let _1HPerSecond = 0;
-let generatorCount = 0;
+let generatorCount = 1;
 let generatorCost = 10;
 
 // DOM elements
@@ -26,7 +26,6 @@ const _1HCountDisplay = document.getElementById('_1H-count');
 const generatorCountDisplay = document.getElementById('_1H-count');
 const generatorCostDisplay = document.getElementById('_1H-cost');
 
-const manualAddButton = document.getElementById('manual-add');
 const buyGeneratorButton = document.getElementById('buy-generator');
 
 // Function to update the resource display
@@ -36,7 +35,7 @@ function updateDisplay() {
     generatorCostDisplay.textContent = generatorCost;
 }
 
-// Add gold manually
+// Add hydrogen manually
 manualAddButton.addEventListener('click', () => {
     _1H += 1;
     updateDisplay();
