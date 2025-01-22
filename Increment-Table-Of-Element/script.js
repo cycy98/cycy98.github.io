@@ -16,7 +16,7 @@ function showTab(tabId, button) {
     activePane.classList.add('active');
 }
 // Game state
-let _1H = 0;
+let _1H = 10;
 let _1HPerSecond = 0;
 let generatorCount = 1;
 let generatorCost = 10;
@@ -35,11 +35,6 @@ function updateDisplay() {
     generatorCostDisplay.textContent = generatorCost;
 }
 
-// Add hydrogen manually
-manualAddButton.addEventListener('click', () => {
-    _1H += 1;
-    updateDisplay();
-});
 
 // Buy a generator
 buyGeneratorButton.addEventListener('click', () => {
