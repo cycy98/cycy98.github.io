@@ -14,6 +14,8 @@ function openTab(tabId) {
 // Set the default tab (Hydrogen Generator)
 document.addEventListener('DOMContentLoaded', () => {
     openTab('generator');
+    updateDisplay();
+    updateAchievements();
 });
 
 // GAME STATE
@@ -29,6 +31,12 @@ const generators = [
     { name: "Quantum Generator", cost: 10000, production: 1000, count: 0 },
 ];
 
+const fusionReactor = {
+    cost: 5000,
+    production: 50,
+    count: 0,
+};
+
 // ACHIEVEMENTS
 let achievements = []; // Initialize achievements as an empty array
 
@@ -39,13 +47,15 @@ const hydrogen3CountDisplay = document.getElementById('hydrogen3-count');
 const generatorTable = document.getElementById('generator-table');
 const achievementsList = document.getElementById('achievements-list');
 const achievementPopup = document.getElementById('achievement-popup');
+const fusionStatusDisplay = document.getElementById('fusion-status');
 
 // Function to update the resource display
 function updateDisplay() {
-    hydrogen1CountDisplay.textContent = hydrogen1.toFixed(1);
-    hydrogen2CountDisplay.textContent = hydrogen2 > 0 ? hydrogen2.toFixed(1) : '0'; // Show 0 if none
-    hydrogen3CountDisplay.textContent = hydrogen3 > 0 ? hydrogen3.toFixed(1) : '0'; // Show 0 if none
+    if (hydrogen1CountDisplay) hydrogen1CountDisplay.textContent = hydrogen1.toFixed(1);
+    if (hydrogen2CountDisplay) hydrogen2CountDisplay.textContent = hydrogen2.toFixed(1);
+    if (hydrogen3CountDisplay) hydrogen3CountDisplay.textContent = hydrogen3.toFixed(1);
 
+    // Update generator table
     generatorTable.innerHTML = generators
         .map((gen, index) => `
             <tr>
@@ -53,12 +63,15 @@ function updateDisplay() {
                 <td>${gen.cost}</td>
                 <td>${gen.production}</td>
                 <td>${gen.count}</td>
-                <td>
-                    <button onclick="buyGenerator(${index})">Buy</button>
-                </td>
+                <td><button onclick="buyGenerator(${index})">Buy</button></td>
             </tr>
         `)
         .join("");
+
+    // Fusion status
+    if (fusionStatusDisplay) {
+        fusionStatusDisplay.textContent = `Fusion Reactor: ${fusionReactor.count} active`;
+    }
 }
 
 // Function to update achievements
@@ -73,8 +86,7 @@ function updateAchievements() {
 
 // Function to add an achievement
 function addAchievement(name) {
-    // Check if the achievement already exists
-    if (!achievements.some(achievement => achievement === name)) {
+    if (!achievements.includes(name)) {
         achievements.push(name);
         updateAchievements();
         showAchievementPopup(name);
@@ -102,23 +114,31 @@ function buyGenerator(index) {
     }
 }
 
+// Function to buy a fusion reactor
+function buyFusionReactor() {
+    if (hydrogen1 >= fusionReactor.cost) {
+        hydrogen1 -= fusionReactor.cost;
+        fusionReactor.count += 1;
+        fusionReactor.cost = Math.ceil(fusionReactor.cost * 1.2); // Increment cost
+        addAchievement("Fusion Reactor Unlocked");
+        updateDisplay();
+    }
+}
+
 // Function to produce Hydrogen and Isotopes (Hydrogen2 and Hydrogen3)
 function produceHydrogen() {
-    // Calculate total production from all generators
     const totalProduction = generators.reduce((sum, gen) => sum + gen.production * gen.count, 0);
-
-    // Add Hydrogen1
-    hydrogen1 += totalProduction / 10;
+    hydrogen1 += totalProduction / 10; // Add Hydrogen1
 
     // Generate isotopes based on Hydrogen1 production, only if totalH1 > 10
     if (totalH1 > 10) {
         const isotopeChance = Math.random();
 
-        // More chance for Deuterium (Hydrogen2) than Tritium (Hydrogen3)
-        if (isotopeChance < 0.02) {
+        // Deuterium is more common than Tritium (Hydrogen2 has a higher chance)
+        if (isotopeChance < 0.03) {
             hydrogen1 -= 1;
             hydrogen2 += 1; // Produce Deuterium (Hydrogen2)
-        } else if (isotopeChance < 0.05) {
+        } else if (isotopeChance < 0.06) {
             hydrogen1 -= 1;
             hydrogen3 += 1; // Produce Tritium (Hydrogen3)
         }
@@ -129,8 +149,6 @@ function produceHydrogen() {
     if (hydrogen2 >= 100) addAchievement("Collected 100 Hydrogen2");
     if (hydrogen3 >= 10) addAchievement("Collected 10 Hydrogen3");
 
-    // Ensure no negative values
-    hydrogen1 = Math.max(0, hydrogen1);
     updateDisplay();
 }
 
@@ -145,7 +163,8 @@ function exportGameState() {
         hydrogen2: hydrogen2,
         hydrogen3: hydrogen3,
         generators: generators,
-        achievements: achievements
+        achievements: achievements,
+        fusionReactor: fusionReactor,
     };
     const gameStateJSON = JSON.stringify(gameState);
     const blob = new Blob([gameStateJSON], { type: 'application/json' });
@@ -169,6 +188,7 @@ function importGameState(fileInput) {
         hydrogen3 = gameState.hydrogen3;
         generators = gameState.generators;
         achievements = gameState.achievements;
+        fusionReactor = gameState.fusionReactor;
         updateDisplay();
         updateAchievements();
     };
