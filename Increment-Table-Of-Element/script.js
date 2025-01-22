@@ -96,10 +96,10 @@ function produceHydrogen() {
     // Unlock isotopes
     if (hydrogen2Unlocked || hydrogen1 >= 1) {
         const isotopeChance = Math.random();
-        if (isotopeChance < 0.1 && hydrogen2Unlocked) {
+        if (isotopeChance < 0.1) {
             hydrogen1 -= 1;
             hydrogen2 += 1;
-        } else if (isotopeChance < 0.05 && hydrogen3Unlocked) {
+        } else if (isotopeChance < 0.05) {
             hydrogen1 -= 1;
             hydrogen3 += 1;
         }
