@@ -64,7 +64,7 @@ function updateDisplay() {
 // Function to update achievements
 function updateAchievements() {
     achievementsList.innerHTML = `
-        <h2>Achievements</h2>
+        <h3>Achievement List</h3> <!-- Title for achievement list -->
         ${achievements
             .map((ach) => `<li>${ach}</li>`)
             .join("")}
