@@ -1,60 +1,133 @@
 // script.js
-function showTab(tabId, button) {
-    // Remove the active class from all buttons
-    const buttons = document.querySelectorAll('.tab-button');
-    buttons.forEach(btn => btn.classList.remove('active'));
 
-    // Remove the active class from all tab panes
-    const panes = document.querySelectorAll('.tab-pane');
-    panes.forEach(pane => pane.classList.remove('active'));
+// TAB FUNCTIONALITY
+function openTab(tabId) {
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach((content) => content.classList.remove('active'));
 
-    // Add the active class to the clicked button
-    button.classList.add('active');
-
-    // Add the active class to the corresponding tab pane
-    const activePane = document.getElementById(tabId);
-    activePane.classList.add('active');
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+    }
 }
-// Game state
-let _1H = 10;
-let _1HPerSecond = 0;
-let generatorCount = 1;
-let generatorCost = 10;
 
-// DOM elements
-const _1HCountDisplay = document.getElementById('_1H-count');
-const generatorCountDisplay = document.getElementById('_1H-count');
-const generatorCostDisplay = document.getElementById('_1H-cost');
+// Set the default tab (Hydrogen Generator)
+document.addEventListener('DOMContentLoaded', () => {
+    openTab('generator');
+});
 
-const buyGeneratorButton = document.getElementById('buy-generator');
+// GAME STATE
+let hydrogen1 = 10; // Start with 10 Hydrogen1
+let hydrogen2 = 0;
+let hydrogen3 = 0;
+
+let hydrogen2Unlocked = false; // 2H appears only after the first one is generated
+let hydrogen3Unlocked = false; // 3H appears only after the first one is generated
+
+const achievements = [];
+const generators = [
+    { name: "Basic Generator", cost: 10, production: 1, count: 0 },
+    { name: "Advanced Generator", cost: 100, production: 10, count: 0 },
+    { name: "Fusion Generator", cost: 1000, production: 100, count: 0 },
+];
+
+// DOM ELEMENTS
+const hydrogen1CountDisplay = document.getElementById('hydrogen1-count');
+const hydrogen2CountDisplay = document.getElementById('hydrogen2-count');
+const hydrogen3CountDisplay = document.getElementById('hydrogen3-count');
+const generatorTable = document.getElementById('generator-table');
+const achievementsList = document.getElementById('achievements-list');
 
 // Function to update the resource display
 function updateDisplay() {
-    _1HCountDisplay.textContent = _1H.toFixed(1);
-    generatorCountDisplay.textContent = generatorCount;
-    generatorCostDisplay.textContent = generatorCost;
+    hydrogen1CountDisplay.textContent = hydrogen1.toFixed(1);
+    hydrogen2CountDisplay.textContent = hydrogen2.toFixed(1);
+    hydrogen3CountDisplay.textContent = hydrogen3.toFixed(1);
+
+    generatorTable.innerHTML = generators
+        .map((gen, index) => `
+            <tr>
+                <td>${gen.name}</td>
+                <td>${gen.cost}</td>
+                <td>${gen.production}</td>
+                <td>${gen.count}</td>
+                <td>
+                    <button onclick="buyGenerator(${index})">Buy</button>
+                </td>
+            </tr>
+        `)
+        .join("");
 }
 
+// Function to update achievements
+function updateAchievements() {
+    achievementsList.innerHTML = achievements
+        .map((ach) => `<li>${ach}</li>`)
+        .join("");
+}
 
-// Buy a generator
-buyGeneratorButton.addEventListener('click', () => {
-    if (_1H >= generatorCost) {
-        _1H -= generatorCost;
-        generatorCount += 1;
-        _1HPerSecond += 1; // Each generator adds 1 gold per second
-        generatorCost = Math.ceil(generatorCost * 1.15); // Increment cost
+// Function to add an achievement
+function addAchievement(name) {
+    if (!achievements.includes(name)) {
+        achievements.push(name);
+        updateAchievements();
+    }
+}
+
+// Function to buy a generator
+function buyGenerator(index) {
+    const generator = generators[index];
+    if (hydrogen1 >= generator.cost) {
+        hydrogen1 -= generator.cost;
+        generator.count += 1;
+        generator.cost = Math.ceil(generator.cost * 1.15); // Increment cost
         updateDisplay();
     }
-});
+}
 
-// Generate gold over time
-function generate1H() {
-    _1H += _1H / 10; // Increment gold every 100ms
+// Function to produce Hydrogen1 and unlock isotopes
+function produceHydrogen() {
+    // Calculate total production from all generators
+    const totalProduction = generators.reduce((sum, gen) => sum + gen.production * gen.count, 0);
+
+    // Add Hydrogen1
+    hydrogen1 += totalProduction / 10;
+
+    // Unlock isotopes
+    if (hydrogen2Unlocked || hydrogen1 >= 1) {
+        const isotopeChance = Math.random();
+        if (isotopeChance < 0.1 && hydrogen2Unlocked) {
+            hydrogen1 -= 1;
+            hydrogen2 += 1;
+        } else if (isotopeChance < 0.05 && hydrogen3Unlocked) {
+            hydrogen1 -= 1;
+            hydrogen3 += 1;
+        }
+
+        if (hydrogen2 > 0 && !hydrogen2Unlocked) {
+            hydrogen2Unlocked = true;
+            addAchievement("Discovered Hydrogen2 (Deuterium)");
+        }
+
+        if (hydrogen3 > 0 && !hydrogen3Unlocked) {
+            hydrogen3Unlocked = true;
+            addAchievement("Discovered Hydrogen3 (Tritium)");
+        }
+    }
+
+    // Add achievements for milestones
+    if (hydrogen1 >= 1000) addAchievement("Reached 1,000 Hydrogen1");
+    if (hydrogen2 >= 100) addAchievement("Collected 100 Hydrogen2");
+    if (hydrogen3 >= 10) addAchievement("Collected 10 Hydrogen3");
+
+    // Ensure no negative values
+    hydrogen1 = Math.max(0, hydrogen1);
     updateDisplay();
 }
 
-// Start generating gold every 100ms
-setInterval(generate1H, 100);
+// Start producing Hydrogen1 every 100ms
+setInterval(produceHydrogen, 100);
 
 // Initial display update
 updateDisplay();
+updateAchievements();
