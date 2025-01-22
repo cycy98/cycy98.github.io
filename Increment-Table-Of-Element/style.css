@@ -1,59 +1,144 @@
+/* styles.css */
+
+/* General body and background settings */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* Light text */
-}
-
-.tabs {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    background-color: #1e1e1e; /* Slightly lighter dark background */
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.tab-buttons {
+    background-color: #1c1c1c; /* Dark background for the body */
+    color: #e0e0e0; /* Light text color */
+    margin: 0;
+    padding: 0;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
-    margin-bottom: 0; /* Align with the tab content */
+    min-height: 100vh;
 }
 
+/* Tab container */
+.tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #333; /* Dark background for the tabs */
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Tab buttons styling */
 .tab-button {
-    flex: 1; /* Ensure buttons are evenly spaced */
-    padding: 10px 20px;
+    background-color: #444;
+    color: white;
     border: none;
-    background-color: #2a2a2a; /* Dark gray for inactive buttons */
-    color: #ffffff; /* White text for inactive buttons */
+    padding: 12px 24px;
+    margin: 0 5px;
     cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s, color 0.3s;
-    text-align: center;
-    font-weight: bold;
-}
-
-.tab-button.active {
-    background-color: #007BFF; /* Highlighted button with blue */
-    color: #ffffff; /* White text on the active button */
+    font-size: 16px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
 }
 
 .tab-button:hover {
-    background-color: #3a3a3a; /* Slightly lighter gray on hover */
+    background-color: #555; /* Slightly lighter on hover */
 }
 
+.tab-button:active {
+    background-color: #666; /* Even lighter on click */
+}
+
+/* Tab content display */
 .tab-content {
-    border: 1px solid #444; /* Subtle border for separation */
-    padding: 20px;
-    background-color: #1e1e1e; /* Match the tabs container */
-    color: #e0e0e0; /* Slightly lighter text for better readability */
-    border-top: none; /* Remove border between buttons and content */
-}
-
-.tab-pane {
     display: none;
+    padding: 20px;
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #2b2b2b; /* Darker content background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.tab-pane.active {
+/* Active tab content will be shown */
+.tab-content.active {
     display: block;
+}
+
+/* Header and titles */
+h2, h3 {
+    text-align: center;
+    color: #e0e0e0; /* Light gray text */
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #444;
+}
+
+table th {
+    background-color: #444; /* Dark table header background */
+    color: #f1f1f1; /* Light text in table header */
+}
+
+table td {
+    background-color: #333; /* Darker background for table rows */
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049; /* Lighter green on hover */
+}
+
+button:active {
+    background-color: #3e8e41; /* Even darker green on click */
+}
+
+/* Achievements section */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #333; /* Dark background for each achievement */
+    color: #b0b0b0; /* Lighter gray text */
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    font-size: 18px;
+}
+
+/* Achievement names */
+li::before {
+    content: "✓"; /* Checkmark icon before each achievement */
+    color: #4CAF50;
+    margin-right: 10px;
+    font-size: 20px;
 }
