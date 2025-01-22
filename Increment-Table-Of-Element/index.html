@@ -3,33 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incremental Table of Element</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Hydrogen Generator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="tabs">
-        <div class="tab-buttons">
-            <button class="tab-button active" onclick="showTab('tab1', this)">Generator</button>
-            <button class="tab-button" onclick="showTab('tab2', this)">Upgrades</button>
-            <button class="tab-button" onclick="showTab('tab3', this)">Settings</button>
-        </div>
-        <div class="tab-content">
-            <div id="tab1" class="tab-pane active">
-                <h2>Hydrogen Generator</h2>
-                <p>1H: <span id="_1H-count">0</span></p>
-
-                <p>Generators: <span id="generator-count">0</span></p>
-                <button id="buy-generator">Buy Generator (Cost: <span id="generator-cost">10</span> 1H)</button>
-            </div>
-            
-            <div id="tab2" class="tab-pane">
-                <h2>Work in Progress</h2>
-            </div>
-            <div id="tab3" class="tab-pane">
-                <h2>Work in Progress</h2>
-            </div>
-        </div>
+        <button class="tab-button" onclick="openTab('generator')">Hydrogen Generator</button>
+        <button class="tab-button" onclick="openTab('achievements')">Achievements</button>
+        <button class="tab-button" onclick="openTab('tab3')">Tab 3</button>
     </div>
+
+    <div id="generator" class="tab-content">
+        <h2>Hydrogen Generator</h2>
+
+        <p>Hydrogen1: <span id="hydrogen1-count">10</span></p>
+        <p>Hydrogen2: <span id="hydrogen2-count">0</span></p>
+        <p>Hydrogen3: <span id="hydrogen3-count">0</span></p>
+
+        <h3>Generators</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Generator Type</th>
+                    <th>Cost (Hydrogen1)</th>
+                    <th>Production (Hydrogen1/s)</th>
+                    <th>Count</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="generator-table">
+                <!-- Rows for generators will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="achievements" class="tab-content">
+        <h2>Achievements</h2>
+        <ul id="achievements-list">
+            <!-- Achievements will be dynamically added here -->
+        </ul>
+    </div>
+
+    <div id="tab3" class="tab-content">
+        <h2>Tab 3</h2>
+        <p>Content for Tab 3.</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
