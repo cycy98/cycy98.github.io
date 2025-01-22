@@ -1,144 +1,72 @@
-/* styles.css */
-
-/* General body and background settings */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1c1c1c; /* Dark background for the body */
-    color: #e0e0e0; /* Light text color */
+    background-color: #1a1a1a;
+    color: white;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
+    padding: 20px;
 }
 
-/* Tab container */
 .tabs {
     display: flex;
-    justify-content: center;
-    background-color: #333; /* Dark background for the tabs */
-    width: 100%;
-    padding: 10px 0;
+    margin-bottom: 20px;
 }
 
-/* Tab buttons styling */
-.tab-button {
-    background-color: #444;
-    color: white;
+.tabs button {
+    background-color: #333;
     border: none;
-    padding: 12px 24px;
-    margin: 0 5px;
+    color: white;
+    padding: 10px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    border-radius: 5px;
+    flex: 1;
 }
 
-.tab-button:hover {
-    background-color: #555; /* Slightly lighter on hover */
+.tabs button:hover {
+    background-color: #444;
 }
 
-.tab-button:active {
-    background-color: #666; /* Even lighter on click */
-}
-
-/* Tab content display */
 .tab-content {
     display: none;
-    padding: 20px;
-    width: 80%;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #2b2b2b; /* Darker content background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Active tab content will be shown */
 .tab-content.active {
     display: block;
 }
 
-/* Header and titles */
-h2, h3 {
-    text-align: center;
-    color: #e0e0e0; /* Light gray text */
-}
-
-h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-h3 {
-    margin-top: 20px;
-    font-size: 24px;
-}
-
-/* Table styles */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
-table th, table td {
-    padding: 12px;
+table, th, td {
+    border: 1px solid #555;
+}
+
+th, td {
+    padding: 10px;
     text-align: center;
-    border: 1px solid #444;
 }
 
-table th {
-    background-color: #444; /* Dark table header background */
-    color: #f1f1f1; /* Light text in table header */
-}
-
-table td {
-    background-color: #333; /* Darker background for table rows */
-}
-
-/* Button styling */
 button {
     padding: 10px 20px;
-    background-color: #4CAF50; /* Green background */
+    background-color: #444;
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #45a049; /* Lighter green on hover */
+    background-color: #666;
 }
 
-button:active {
-    background-color: #3e8e41; /* Even darker green on click */
-}
-
-/* Achievements section */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    background-color: #333; /* Dark background for each achievement */
-    color: #b0b0b0; /* Lighter gray text */
-    margin: 10px 0;
-    padding: 12px;
+.popup {
+    background-color: #333;
+    color: #f0f0f0;
+    padding: 10px;
     border-radius: 5px;
-    border: 1px solid #444;
-    font-size: 18px;
-}
-
-/* Achievement names */
-li::before {
-    content: "✓"; /* Checkmark icon before each achievement */
-    color: #4CAF50;
-    margin-right: 10px;
-    font-size: 20px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
 }
