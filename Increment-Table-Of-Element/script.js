@@ -92,10 +92,12 @@ function produceHydrogen() {
     // Generate isotopes based on Hydrogen1 production
     if (hydrogen1 >= 1) {
         const isotopeChance = Math.random();
-        if (isotopeChance < 0.1) {
+        
+        // Lower chances of producing Deuterium (Hydrogen2) and Tritium (Hydrogen3)
+        if (isotopeChance < 0.005) {
             hydrogen1 -= 1;
             hydrogen2 += 1; // Produce Deuterium (Hydrogen2)
-        } else if (isotopeChance < 0.05) {
+        } else if (isotopeChance < 0.01) {
             hydrogen1 -= 1;
             hydrogen3 += 1; // Produce Tritium (Hydrogen3)
         }
