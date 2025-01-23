@@ -15,10 +15,13 @@ let hydrogen2 = 0;
 let hydrogen3 = 0;
 
 const generators = [
-    { name: "Basic Generator", cost: 10, production: 1, count: 0 },
-    { name: "Advanced Generator", cost: 100, production: 10, count: 0 },
-    { name: "Fusion Generator", cost: 1000, production: 100, count: 0 },
-    { name: "Quantum Generator", cost: 10000, production: 1000, count: 0 },
+    { name: "Generator I", cost: 10, production: 1, count: 0 },
+    { name: "Generator II", cost: 100, production: 10, count: 0 },
+    { name: "Generator III", cost: 1000, production: 100, count: 0 },
+    { name: "Generator IV", cost: 10000, production: 1000, count: 0 },
+    { name: "Generator V", cost: 100000, production: 10000, count: 0 },
+    { name: "Generator VI", cost: 1000000, production: 100000, count: 0 },
+    { name: "Generator VII", cost: 10000000, production: 1000000, count: 0 },
 ];
 
 // Function to update the resource display
