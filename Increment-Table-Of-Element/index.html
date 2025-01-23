@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incremental Game</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="tabs">
@@ -15,8 +15,27 @@
 
     <!-- Generators Tab -->
     <div id="generator" class="tab-content">
-        <h2>Hydrogen Generators</h2>
-        <table id="generator-table"></table>
+        <h2>Hydrogen Generator</h2>
+
+        <p>Hydrogen1: <span id="hydrogen1-count">10</span></p>
+        <p>Hydrogen2: <span id="hydrogen2-count">0</span></p>
+        <p>Hydrogen3: <span id="hydrogen3-count">0</span></p>
+
+        <h3>Generators</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Generator Type</th>
+                    <th>Cost (Hydrogen1)</th>
+                    <th>Production (Hydrogen1/s)</th>
+                    <th>Count</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="generator-table">
+                <!-- Rows for generators will be dynamically inserted here -->
+            </tbody>
+        </table>
     </div>
 
     <!-- Fusion Tab -->
@@ -40,6 +59,6 @@
         <input type="file" id="file-input" onchange="importGameState(this)" />
     </div>
 
-    <script src="script.js"></script> <!-- Link to your JS file -->
+    <script src="script.js"></script>
 </body>
 </html>
