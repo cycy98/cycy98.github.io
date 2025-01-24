@@ -52,6 +52,7 @@ header nav button:hover {
     grid-template-columns: repeat(18, 40px);
     gap: 5px;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .element {
