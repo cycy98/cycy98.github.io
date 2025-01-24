@@ -17,8 +17,8 @@ let helium = 0;
 let unlockedElements = ['H']; // Start with hydrogen unlocked
 const generators = Array.from({ length: 10 }, (_, i) => ({
     name: `Generator ${i + 1}`,
-    cost: 5 * Math.pow(5, i), // Reduced cost scaling
-    production: Math.pow(2, i),
+    cost: 2 * Math.pow(5, i), // Reduced cost scaling
+    production: Math.pow(4, i),
     count: 0,
 }));
 const achievements = [];
