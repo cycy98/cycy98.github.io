@@ -7,58 +7,61 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="tabs">
-        <button onclick="openTab('generator')">Generators</button>
-        <button onclick="openTab('fusion')">Fusion</button>
-        <button onclick="openTab('achievements')">Achievements</button>
-    </div>
+    <header>
+        <nav>
+            <button onclick="openTab('generator')">Generator</button>
+            <button onclick="openTab('fusion')">Fusion</button>
+            <button onclick="openTab('achievements')">Achievements</button>
+            <button onclick="openTab('periodic-table')">Periodic Table</button>
+            <button onclick="openTab('settings')">Settings</button>
+        </nav>
+    </header>
 
-    <!-- Generators Tab -->
-    <div id="generator" class="tab-content">
-        <h2>Hydrogen Generator</h2>
-        
-        <p>Hydrogen1: <span id="hydrogen1-count">10</span></p>
-        <p>Hydrogen2: <span id="hydrogen2-count">0</span></p>
-        <p>Hydrogen3: <span id="hydrogen3-count">0</span></p>
+    <main>
+        <div id="generator" class="tab-content">
+            <h2>Hydrogen Generator</h2>
+            <p>Hydrogen1: <span id="hydrogen1-count">10</span></p>
+            <p>Hydrogen2: <span id="hydrogen2-count">0</span></p>
+            <p>Hydrogen3: <span id="hydrogen3-count">0</span></p>
 
-        <h3>Generators</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Generator Type</th>
-                    <th>Cost (Hydrogen1)</th>
-                    <th>Production (Hydrogen1/s)</th>
-                    <th>Count</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="generator-table"></tbody>
-        </table>
-    </div>
+            <h3>Generators</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Generator Type</th>
+                        <th>Cost (Hydrogen1)</th>
+                        <th>Production (Hydrogen1/s)</th>
+                        <th>Count</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="generator-table"></tbody>
+            </table>
+        </div>
 
-    <div id="fusion" class="tab-content">
-        <h2>Fusion</h2>
-        <p>Unlock new elements through fusion. (To be implemented)</p>
-    </div>
-    
-    <div id="achievements" class="tab-content">
-        <h2>Achievements</h2>
-        <div id="achievement-list"></div>
-    </div>
+        <div id="fusion" class="tab-content">
+            <h2>Fusion</h2>
+            <p>Unlock new elements through fusion. (To be implemented)</p>
+        </div>
 
+        <div id="achievements" class="tab-content">
+            <h2>Achievements</h2>
+            <div id="achievement-list"></div>
+        </div>
 
-    <!-- Achievements Tab -->
-    <div id="achievements" class="tab-content">
-        <h2>Achievements</h2>
-        <ul id="achievements-list"></ul>
-        <div id="achievement-popup" class="popup"></div>
-    </div>
+        <div id="periodic-table" class="tab-content">
+            <h2>Periodic Table</h2>
+            <div id="periodic-table-container"></div>
+        </div>
 
-    <!-- Import/Export Buttons -->
-    <div>
-        <button onclick="exportGameState()">Export Game</button>
-        <input type="file" id="file-input" onchange="importGameState(this)" />
-    </div>
+        <div id="settings" class="tab-content">
+            <h2>Settings</h2>
+            <button onclick="exportGame()">Export Progress</button>
+            <button onclick="importGame()">Import Progress</button>
+        </div>
+    </main>
+
+    <div id="achievement-popup"></div>
 
     <script src="script.js"></script>
 </body>
