@@ -1,71 +1,140 @@
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #111;
-    color: #fff;
-    margin: 0;
-    padding: 0;
+// TAB FUNCTIONALITY
+function openTab(tabId) {
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach((content) => content.classList.remove('active'));
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+    }
 }
 
-header nav {
-    display: flex;
-    justify-content: space-around;
-    background-color: #222;
-    padding: 10px;
+// GAME STATE
+let hydrogen1 = 10;
+let totalH1 = 10;
+let hydrogen2 = 0;
+let hydrogen3 = 0;
+let unlockedElements = ['H']; // Start with hydrogen unlocked
+const generators = Array.from({ length: 10 }, (_, i) => ({
+    name: `Generator ${i + 1}`,
+    cost: Math.pow(10, i + 1),
+    production: Math.pow(2, i),
+    count: 0,
+}));
+const achievements = [];
+
+// FUNCTIONALITY
+function updateDisplay() {
+    document.getElementById('hydrogen1-count').textContent = hydrogen1.toFixed(1);
+    document.getElementById('hydrogen2-count').textContent = hydrogen2.toFixed(1);
+    document.getElementById('hydrogen3-count').textContent = hydrogen3.toFixed(1);
+    updateGeneratorTable();
+    updateAchievements();
+    updatePeriodicTable();
 }
 
-header nav button {
-    background: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+function updateGeneratorTable() {
+    const table = document.getElementById('generator-table');
+    if (table) {
+        table.innerHTML = generators
+            .map((gen, i) => `
+                <tr>
+                    <td>${gen.name}</td>
+                    <td>${gen.cost}</td>
+                    <td>${gen.production}</td>
+                    <td>${gen.count}</td>
+                    <td><button onclick="buyGenerator(${i})">Buy</button></td>
+                </tr>
+            `).join('');
+    }
 }
 
-header nav button:hover {
-    background: #555;
+function buyGenerator(index) {
+    const gen = generators[index];
+    if (hydrogen1 >= gen.cost) {
+        hydrogen1 -= gen.cost;
+        totalH1 += gen.production;
+        gen.count++;
+        gen.cost = Math.ceil(gen.cost * 1.15);
+        updateDisplay();
+    }
 }
 
-.tab-content {
-    display: none;
-    padding: 20px;
+function produceHydrogen() {
+    const totalProduction = generators.reduce((sum, gen) => sum + gen.production * gen.count, 0);
+    hydrogen1 += totalProduction / 10;
+    const isotopeChance = Math.random();
+    if (totalH1 > 10) {
+        if (isotopeChance < 0.05) hydrogen2++;
+        else if (isotopeChance < 0.07) hydrogen3++;
+    }
+    updateDisplay();
 }
 
-.tab-content.active {
-    display: block;
+function updateAchievements() {
+    const achievementList = document.getElementById('achievement-list');
+    if (achievementList) {
+        achievementList.innerHTML = achievements
+            .map(a => `<p><strong>${a.name}</strong>: ${a.description}</p>`)
+            .join('');
+    }
 }
 
-#generator table {
-    width: 100%;
-    margin-top: 10px;
-    border-collapse: collapse;
+function addAchievement(name, description) {
+    if (!achievements.some(a => a.name === name)) {
+        achievements.push({ name, description });
+        showAchievementPopup(name);
+    }
 }
 
-#generator th, #generator td {
-    border: 1px solid #444;
-    padding: 8px;
-    text-align: center;
+function showAchievementPopup(name) {
+    const popup = document.getElementById('achievement-popup');
+    if (popup) {
+        popup.textContent = `Achievement Unlocked: ${name}`;
+        popup.style.display = 'block';
+        setTimeout(() => popup.style.display = 'none', 3000);
+    }
 }
 
-#periodic-table-container {
-    display: grid;
-    grid-template-columns: repeat(18, 40px);
-    gap: 5px;
-    justify-content: center;
+function updatePeriodicTable() {
+    const table = document.getElementById('periodic-table-container');
+    if (table) {
+        const elements = [
+            'H', 'He', // Row 1
+            // Add all elements you want here
+        ];
+        table.innerHTML = elements.map(el => `
+            <div class="element ${unlockedElements.includes(el) ? 'unlocked' : ''}">
+                ${el}
+            </div>
+        `).join('');
+    }
 }
 
-.element {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #555;
-    background-color: #333;
-    color: #fff;
-    cursor: default;
+// SETTINGS
+function exportGame() {
+    const data = JSON.stringify({ hydrogen1, totalH1, hydrogen2, hydrogen3, unlockedElements });
+    navigator.clipboard.writeText(data);
+    alert('Game exported to clipboard!');
 }
 
-.element.unlocked {
-    background-color: #0f0;
+function importGame() {
+    const data = prompt('Paste your saved game data:');
+    if (data) {
+        const parsed = JSON.parse(data);
+        hydrogen1 = parsed.hydrogen1 || hydrogen1;
+        totalH1 = parsed.totalH1 || totalH1;
+        hydrogen2 = parsed.hydrogen2 || hydrogen2;
+        hydrogen3 = parsed.hydrogen3 || hydrogen3;
+        unlockedElements = parsed.unlockedElements || unlockedElements;
+        updateDisplay();
+    }
 }
+
+// INTERVALS
+setInterval(produceHydrogen, 100);
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    openTab('generator');
+    updateDisplay();
+});
