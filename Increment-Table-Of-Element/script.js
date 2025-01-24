@@ -18,7 +18,7 @@ let hydrogen3 = 0;
 const generators = Array.from({ length: 10 }, (_, i) => ({
     name: `Generator ${i + 1}`,
     cost: Math.pow(10, i + 1), // Exponential cost
-    production: Math.pow(2, i), // Exponential production
+    production: Math.pow(11, i), // Exponential production
     count: 0,
 }));
 
