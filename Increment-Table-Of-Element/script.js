@@ -13,10 +13,11 @@ let hydrogen1 = 10;
 let totalH1 = 10;
 let hydrogen2 = 0;
 let hydrogen3 = 0;
+let helium = 0;
 let unlockedElements = ['H']; // Start with hydrogen unlocked
 const generators = Array.from({ length: 10 }, (_, i) => ({
     name: `Generator ${i + 1}`,
-    cost: Math.pow(10, i + 1),
+    cost: 5 * Math.pow(5, i), // Reduced cost scaling
     production: Math.pow(2, i),
     count: 0,
 }));
@@ -27,6 +28,7 @@ function updateDisplay() {
     document.getElementById('hydrogen1-count').textContent = hydrogen1.toFixed(1);
     document.getElementById('hydrogen2-count').textContent = hydrogen2.toFixed(1);
     document.getElementById('hydrogen3-count').textContent = hydrogen3.toFixed(1);
+    document.getElementById('helium-count').textContent = helium.toFixed(1);
     updateGeneratorTable();
     updateAchievements();
     updatePeriodicTable();
@@ -52,7 +54,6 @@ function buyGenerator(index) {
     const gen = generators[index];
     if (hydrogen1 >= gen.cost) {
         hydrogen1 -= gen.cost;
-        totalH1 += gen.production;
         gen.count++;
         gen.cost = Math.ceil(gen.cost * 1.15);
         updateDisplay();
@@ -64,43 +65,31 @@ function produceHydrogen() {
     hydrogen1 += totalProduction / 10;
     const isotopeChance = Math.random();
     if (totalH1 > 10) {
-        if (isotopeChance < 0.05) hydrogen2++;
-        else if (isotopeChance < 0.07) hydrogen3++;
+        if (isotopeChance < 0.08) hydrogen2++;
+        else if (isotopeChance < 0.1) hydrogen3++;
     }
     updateDisplay();
 }
 
-function updateAchievements() {
-    const achievementList = document.getElementById('achievement-list');
-    if (achievementList) {
-        achievementList.innerHTML = achievements
-            .map(a => `<p><strong>${a.name}</strong>: ${a.description}</p>`)
-            .join('');
+// FUSION
+function fuse(isotope1, isotope2) {
+    if (isotope1 === 'Hydrogen2' && isotope2 === 'Hydrogen2' && hydrogen2 >= 2) {
+        hydrogen2 -= 2;
+        helium++;
+        if (!unlockedElements.includes('He')) {
+            unlockedElements.push('He');
+        }
+        updateDisplay();
     }
 }
 
-function addAchievement(name, description) {
-    if (!achievements.some(a => a.name === name)) {
-        achievements.push({ name, description });
-        showAchievementPopup(name);
-    }
-}
-
-function showAchievementPopup(name) {
-    const popup = document.getElementById('achievement-popup');
-    if (popup) {
-        popup.textContent = `Achievement Unlocked: ${name}`;
-        popup.style.display = 'block';
-        setTimeout(() => popup.style.display = 'none', 3000);
-    }
-}
-
+// PERIODIC TABLE
 function updatePeriodicTable() {
     const table = document.getElementById('periodic-table-container');
     if (table) {
         const elements = [
-            'H', 'He', // Row 1
-            // Add all elements you want here
+            'H', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'He',
+            // Fill with placeholders for layout
         ];
         table.innerHTML = elements.map(el => `
             <div class="element ${unlockedElements.includes(el) ? 'unlocked' : ''}">
@@ -112,7 +101,7 @@ function updatePeriodicTable() {
 
 // SETTINGS
 function exportGame() {
-    const data = JSON.stringify({ hydrogen1, totalH1, hydrogen2, hydrogen3, unlockedElements });
+    const data = JSON.stringify({ hydrogen1, hydrogen2, hydrogen3, helium, unlockedElements });
     navigator.clipboard.writeText(data);
     alert('Game exported to clipboard!');
 }
@@ -122,9 +111,9 @@ function importGame() {
     if (data) {
         const parsed = JSON.parse(data);
         hydrogen1 = parsed.hydrogen1 || hydrogen1;
-        totalH1 = parsed.totalH1 || totalH1;
         hydrogen2 = parsed.hydrogen2 || hydrogen2;
         hydrogen3 = parsed.hydrogen3 || hydrogen3;
+        helium = parsed.helium || helium;
         unlockedElements = parsed.unlockedElements || unlockedElements;
         updateDisplay();
     }
