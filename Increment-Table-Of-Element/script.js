@@ -35,7 +35,6 @@ function updateDisplay() {
     updateAchievements();
     updatePeriodicTable();
 }
-
 function updateGeneratorTable() {
     const table = document.getElementById('generator-table');
     if (table) {
@@ -48,9 +47,17 @@ function updateGeneratorTable() {
                     <td>${gen.count}</td>
                     <td><button onclick="buyGenerator(${i})">Buy</button></td>
                 </tr>
-            `).join('');
+            `)
+            .join('');
     }
 }
+
+// Ensure this function is called during initialization
+document.addEventListener('DOMContentLoaded', () => {
+    openTab('generator');
+    updateDisplay();
+});
+
 
 function buyGenerator(index) {
     const gen = generators[index];
