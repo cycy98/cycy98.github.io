@@ -19,8 +19,8 @@ let unlockedElements = ['H']; // Start with hydrogen unlocked
 let generators = [];
 
 function initializeGenerators() {
-    for (let i = 1; i <= 10; i++) {
-        const cost = 10 * Math.pow(10, i + 1); // Cost increases exponentially
+    for (let i = 0; i <= 10; i++) {
+        const cost = 10 * Math.pow(10, i); // Cost increases exponentially
         const production = i * Math.pow(10, i); // Slightly better production per cost
 
         generators.push({
