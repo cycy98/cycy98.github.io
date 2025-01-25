@@ -21,19 +21,19 @@
         <!-- Generator Tab -->
         <div id="generator" class="tab-content">
             <h2>Hydrogen Generator</h2>
-            <p>Hydrogen-1: <span id="hydrogen1-count">10</span></p>
-            <p>Hydrogen-2: <span id="hydrogen2-count">0</span></p>
-            <p>Hydrogen-3: <span id="hydrogen3-count">0</span></p>
-            <p>Helium-3: <span id="helium3-count">0</span></p>
-            <p>Helium-4: <span id="helium4-count">0</span></p>
+            <p>1H (Hydrogen-1): <span id="1H-count">10</span></p>
+            <p>2H (Deuterium): <span id="2H-count">0</span></p>
+            <p>3H (Tritium): <span id="3H-count">0</span></p>
+            <p>3He (Helium-3): <span id="3He-count">0</span></p>
+            <p>4He (Helium-4): <span id="4He-count">0</span></p>
 
             <h3>Generators</h3>
             <table>
                 <thead>
                     <tr>
                         <th>Generator Type</th>
-                        <th>Cost (Hydrogen-1)</th>
-                        <th>Production (Hydrogen-1/s)</th>
+                        <th>Cost (1H)</th>
+                        <th>Production (1H/s)</th>
                         <th>Count</th>
                         <th>Action</th>
                     </tr>
@@ -47,8 +47,8 @@
             <h2>Fusion</h2>
             <p>Combine isotopes to create new elements and unlock more progress.</p>
             <div>
-                <button onclick="fuse('Hydrogen2', 'Hydrogen2')">2H + 2H → Helium-4</button>
-                <button onclick="fuse('Hydrogen3', 'Hydrogen2')">3H + 2H → Helium-3</button>
+                <button onclick="fuse('2H', '2H')">2H + 2H → 4He</button>
+                <button onclick="fuse('3H', '2H')">3H + 2H → 3He</button>
             </div>
         </div>
 
