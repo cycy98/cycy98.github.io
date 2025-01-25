@@ -26,15 +26,17 @@ const achievements = [];
 
 // FUNCTIONALITY
 function updateDisplay() {
-    document.getElementById('1H-count').textContent = hydrogen1.toFixed(1);
-    document.getElementById('2H-count').textContent = hydrogen2.toFixed(1);
-    document.getElementById('3H-count').textContent = hydrogen3.toFixed(1);
-    document.getElementById('3He-count').textContent = helium3.toFixed(1);
-    document.getElementById('4He-count').textContent = helium4.toFixed(1);
+    const hydrogen1Element = document.getElementById('hydrogen1-count');
+    const hydrogen2Element = document.getElementById('hydrogen2-count');
+    const hydrogen3Element = document.getElementById('hydrogen3-count');
+
+    if (hydrogen1Element) hydrogen1Element.textContent = hydrogen1.toFixed(1);
+    if (hydrogen2Element) hydrogen2Element.textContent = hydrogen2.toFixed(1);
+    if (hydrogen3Element) hydrogen3Element.textContent = hydrogen3.toFixed(1);
+
     updateGeneratorTable();
-    updateAchievements();
-    updatePeriodicTable();
 }
+
 function updateGeneratorTable() {
     const table = document.getElementById('generator-table');
     if (table) {
