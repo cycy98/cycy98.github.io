@@ -74,14 +74,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function buyGenerator(index) {
-    const gen = generators[index];
-    if (hydrogen1 >= gen.cost) {
-        hydrogen1 -= gen.cost;
-        gen.count++;
-        gen.cost = Math.ceil(gen.cost * 1.15);
+    const generator = generators[index];
+    if (hydrogen1 >= generator.cost) {
+        hydrogen1 -= generator.cost;
+        generator.count += 1;
+        generator.cost = Math.ceil(generator.cost * 1.5); // Increase cost for the next generator
         updateDisplay();
     }
 }
+
 
 function produceHydrogen() {
     const totalProduction = generators.reduce((sum, gen) => sum + gen.production * gen.count, 0);
