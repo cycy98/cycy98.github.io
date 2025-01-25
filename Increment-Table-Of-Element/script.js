@@ -18,19 +18,19 @@ let helium4 = 0;
 let unlockedElements = ['H']; // Start with hydrogen unlocked
 const generators = Array.from({ length: 10 }, (_, i) => ({
     name: `Generator ${i + 1}`,
-    cost: 10 * Math.pow(2, i), // Starts at 10 and scales
-    production: Math.pow(1.5, i),
+    cost: Math.pow(10, i + 1), // Powers of 10: 10, 100, 1,000, etc.
+    production: Math.pow(10, i) * 1.2, // Slightly better production scaling
     count: 0,
 }));
 const achievements = [];
 
 // FUNCTIONALITY
 function updateDisplay() {
-    document.getElementById('hydrogen1-count').textContent = hydrogen1.toFixed(1);
-    document.getElementById('hydrogen2-count').textContent = hydrogen2.toFixed(1);
-    document.getElementById('hydrogen3-count').textContent = hydrogen3.toFixed(1);
-    document.getElementById('helium3-count').textContent = helium3.toFixed(1);
-    document.getElementById('helium4-count').textContent = helium4.toFixed(1);
+    document.getElementById('1H-count').textContent = hydrogen1.toFixed(1);
+    document.getElementById('2H-count').textContent = hydrogen2.toFixed(1);
+    document.getElementById('3H-count').textContent = hydrogen3.toFixed(1);
+    document.getElementById('3He-count').textContent = helium3.toFixed(1);
+    document.getElementById('4He-count').textContent = helium4.toFixed(1);
     updateGeneratorTable();
     updateAchievements();
     updatePeriodicTable();
@@ -44,7 +44,7 @@ function updateGeneratorTable() {
                 <tr>
                     <td>${gen.name}</td>
                     <td>${gen.cost}</td>
-                    <td>${gen.production}</td>
+                    <td>${gen.production.toFixed(1)}</td>
                     <td>${gen.count}</td>
                     <td><button onclick="buyGenerator(${i})">Buy</button></td>
                 </tr>
@@ -68,25 +68,53 @@ function produceHydrogen() {
 
     const isotopeChance = Math.random();
     if (totalH1 > 10) {
-        if (isotopeChance < 0.1) hydrogen2++; // 10% for Deuterium
-        else if (isotopeChance < 0.13) hydrogen3++; // 3% for Tritium
+        if (isotopeChance < 0.15) hydrogen2++; // 15% for Deuterium
+        else if (isotopeChance < 0.18) hydrogen3++; // 3% for Tritium
     }
     updateDisplay();
 }
 
 // ACHIEVEMENTS
 function updateAchievements() {
-    // Achievement logic...
+    const achievementList = document.getElementById('achievement-list');
+    if (achievementList) {
+        achievementList.innerHTML = achievements
+            .map((ach) => `<p>${ach}</p>`)
+            .join('');
+    }
 }
 
 // FUSION
 function fuse(isotope1, isotope2) {
-    // Fusion logic...
+    if (isotope1 === '2H' && isotope2 === '2H' && hydrogen2 >= 2) {
+        hydrogen2 -= 2;
+        helium4++;
+    } else if (isotope1 === '3H' && isotope2 === '2H' && hydrogen3 >= 1 && hydrogen2 >= 1) {
+        hydrogen3--;
+        hydrogen2--;
+        helium3++;
+    }
+    updateDisplay();
 }
 
 // PERIODIC TABLE
 function updatePeriodicTable() {
-    // Periodic table logic...
+    const container = document.getElementById('periodic-table-container');
+    if (container) {
+        const elements = [
+            { symbol: 'H', atomicNumber: 1 },
+            { symbol: '', atomicNumber: 2 }, // Spacer
+            { symbol: 'He', atomicNumber: 2 },
+            // Additional elements can be added here
+        ];
+        container.innerHTML = elements
+            .map((el) => `
+                <div class="element ${unlockedElements.includes(el.symbol) ? 'unlocked' : ''}">
+                    ${el.symbol}
+                </div>
+            `)
+            .join('');
+    }
 }
 
 // SETTINGS
