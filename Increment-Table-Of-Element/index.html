@@ -18,19 +18,22 @@
     </header>
 
     <main>
+        <!-- Generator Tab -->
         <div id="generator" class="tab-content">
             <h2>Hydrogen Generator</h2>
-            <p>Hydrogen1: <span id="hydrogen1-count">10</span></p>
-            <p>Hydrogen2: <span id="hydrogen2-count">0</span></p>
-            <p>Hydrogen3: <span id="hydrogen3-count">0</span></p>
+            <p>Hydrogen-1: <span id="hydrogen1-count">10</span></p>
+            <p>Hydrogen-2: <span id="hydrogen2-count">0</span></p>
+            <p>Hydrogen-3: <span id="hydrogen3-count">0</span></p>
+            <p>Helium-3: <span id="helium3-count">0</span></p>
+            <p>Helium-4: <span id="helium4-count">0</span></p>
 
             <h3>Generators</h3>
             <table>
                 <thead>
                     <tr>
                         <th>Generator Type</th>
-                        <th>Cost (Hydrogen1)</th>
-                        <th>Production (Hydrogen1/s)</th>
+                        <th>Cost (Hydrogen-1)</th>
+                        <th>Production (Hydrogen-1/s)</th>
                         <th>Count</th>
                         <th>Action</th>
                     </tr>
@@ -39,25 +42,29 @@
             </table>
         </div>
 
+        <!-- Fusion Tab -->
         <div id="fusion" class="tab-content">
             <h2>Fusion</h2>
-            <p>Combine isotopes to create new elements.</p>
+            <p>Combine isotopes to create new elements and unlock more progress.</p>
             <div>
-                <button onclick="fuse('Hydrogen2', 'Hydrogen2')">Combine 2H + 2H → Helium (He)</button>
+                <button onclick="fuse('Hydrogen2', 'Hydrogen2')">2H + 2H → Helium-4</button>
+                <button onclick="fuse('Hydrogen3', 'Hydrogen2')">3H + 2H → Helium-3</button>
             </div>
-            <p>Helium: <span id="helium-count">0</span></p>
         </div>
 
+        <!-- Achievements Tab -->
         <div id="achievements" class="tab-content">
             <h2>Achievements</h2>
             <div id="achievement-list"></div>
         </div>
 
+        <!-- Periodic Table Tab -->
         <div id="periodic-table" class="tab-content">
             <h2>Periodic Table</h2>
             <div id="periodic-table-container"></div>
         </div>
 
+        <!-- Settings Tab -->
         <div id="settings" class="tab-content">
             <h2>Settings</h2>
             <button onclick="exportGame()">Export Progress</button>
