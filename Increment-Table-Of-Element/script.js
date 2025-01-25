@@ -16,12 +16,23 @@ let hydrogen3 = 0;
 let helium3 = 0;
 let helium4 = 0;
 let unlockedElements = ['H']; // Start with hydrogen unlocked
-const generators = Array.from({ length: 10 }, (_, i) => ({
-    name: `Generator ${i + 1}`,
-    cost: Math.pow(10, i + 1), // Powers of 10: 10, 100, 1,000, etc.
-    production: Math.pow(10, i) * 1.2, // Slightly better production scaling
-    count: 0,
-}));
+let generators = [];
+
+function initializeGenerators() {
+    for (let i = 1; i <= 10; i++) {
+        const cost = 10 * Math.pow(10, i - 1); // Cost increases exponentially
+        const production = i * Math.pow(10, i - 2); // Slightly better production per cost
+
+        generators.push({
+            name: `Generator ${i}`,
+            cost: cost,
+            production: production,
+            count: 0,
+        });
+    }
+}
+
+initializeGenerators();
 const achievements = [];
 
 // FUNCTIONALITY
@@ -44,8 +55,8 @@ function updateGeneratorTable() {
             .map((gen, i) => `
                 <tr>
                     <td>${gen.name}</td>
-                    <td>${gen.cost}</td>
-                    <td>${gen.production.toFixed(1)}</td>
+                    <td>${gen.cost.toExponential(2)} (1H)</td>
+                    <td>${gen.production.toExponential(2)} (1H/s)</td>
                     <td>${gen.count}</td>
                     <td><button onclick="buyGenerator(${i})">Buy</button></td>
                 </tr>
@@ -53,6 +64,7 @@ function updateGeneratorTable() {
             .join('');
     }
 }
+
 
 // Ensure this function is called during initialization
 document.addEventListener('DOMContentLoaded', () => {
