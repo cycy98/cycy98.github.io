@@ -41,9 +41,11 @@ function stop() {
         elapsedTime = performance.now() * 1e6 - startTime;
         running = false;
         clearInterval(interval);
-        updateDisplay(); // Ensures the display updates with the exact stop time
+        updateDisplay(); // <== Ensures exact stop time is shown
+        console.log("Stopped at:", elapsedTime, "nanoseconds");
     }
 }
+
 
 
 
