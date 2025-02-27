@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    padding: 25px;
+    background-color: black;
+    color: white;
+}
+#time {
+    font-size: 2rem;
+    margin: 20px;
+}
+button {
+    font-size: 1.2rem;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #202020;
+    color: white;
+    transition: 0.5s;
+}
+button:hover {
+    background-color: #007FFF;
+    color: white;
+}
+
+.title {
+    color: #FF0000;
+}
