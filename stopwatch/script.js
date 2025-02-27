@@ -24,7 +24,7 @@ function start() {
     if (!running) {
         startTime = performance.now() * 1e6 - elapsedTime;
         running = true;
-        interval = setInterval(updateDisplay, 10);
+        interval = setInterval(updateDisplay, 1);
     }
 }
 
