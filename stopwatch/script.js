@@ -24,9 +24,17 @@ function start() {
     if (!running) {
         startTime = performance.now() * 1e6 - elapsedTime;
         running = true;
-        interval = setInterval(updateDisplay, 1);
+        updateDisplayLoop(); // Use requestAnimationFrame instead of setInterval
     }
 }
+
+function updateDisplayLoop() {
+    if (running) {
+        updateDisplay();
+        requestAnimationFrame(updateDisplayLoop); // Calls itself continuously
+    }
+}
+
 
 function stop() {
     if (running) {
