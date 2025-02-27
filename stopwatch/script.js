@@ -33,6 +33,7 @@ function stop() {
         elapsedTime = performance.now() * 1e6 - startTime;
         running = false;
         clearInterval(interval);
+        updateDisplay(); // Ensures the display updates with the exact stop time
     }
 }
 
