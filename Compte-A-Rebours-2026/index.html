@@ -14,7 +14,7 @@
             transition: background-color 0.5s, color 0.5s;
         }
         .timer {
-            font-size: 2rem;
+            font-size: 40px;
             font-weight: bold;
         }
         .celebration {
@@ -39,12 +39,10 @@
                 if (diffInSeconds <= 10) {
                     // Show milliseconds when less than 10 seconds remaining
                     const milliseconds = diffInMilliseconds % 1000;
-                    const secondsText = diffInSeconds === 1 ? 'seconde' : 'secondes';
-                    document.getElementById('timer').textContent = `${diffInSeconds}.${milliseconds.toString().padStart(3, '0')} ${secondsText}`;
+                    document.getElementById('timer').textContent = `${diffInSeconds}.${milliseconds.toString().padStart(3, '0')}`;
                 } else {
                     // Regular display for more than 10 seconds
-                    const secondsText = diffInSeconds === 1 ? 'seconde' : 'secondes';
-                    document.getElementById('timer').textContent = `${diffInSeconds} ${secondsText}`;
+                    document.getElementById('timer').textContent = `${diffInSeconds}`;
                 }
             } else {
                 document.getElementById('timer').textContent = "Bonne année 2026 !";
