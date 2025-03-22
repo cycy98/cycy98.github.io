@@ -40,7 +40,7 @@
                     // Show milliseconds when less than 10 seconds remaining
                     const milliseconds = diffInMilliseconds % 1000;
                     const secondsText = diffInSeconds === 1 ? 'seconde' : 'secondes';
-                    document.getElementById('timer').textContent = `${diffInSeconds}.${milliseconds.toString().padStart(3, '0')} ${secondsText} restantes avant 2026`;
+                    document.getElementById('timer').textContent = `${diffInSeconds}.${milliseconds.toString().padStart(3, '0')} ${secondsText}`;
                 } else {
                     // Regular display for more than 10 seconds
                     const secondsText = diffInSeconds === 1 ? 'seconde' : 'secondes';
