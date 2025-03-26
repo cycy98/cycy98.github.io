@@ -47,6 +47,7 @@ function updateDisplay() {
         console.error("Element #hydrogen1-count not found!");
     const hydrogen2Element = document.getElementById('hydrogen2-count');
     const hydrogen3Element = document.getElementById('hydrogen3-count');
+    }
 
     if (hydrogen2Element) hydrogen2Element.textContent = hydrogen2.toFixed(1);
     if (hydrogen3Element) hydrogen3Element.textContent = hydrogen3.toFixed(1);
