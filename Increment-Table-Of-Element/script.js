@@ -37,11 +37,17 @@ const achievements = [];
 
 // FUNCTIONALITY
 function updateDisplay() {
+    console.log("Updating display...");
+    console.log("Hydrogen1:", hydrogen1); // Debug log
     const hydrogen1Element = document.getElementById('hydrogen1-count');
+    
+    if (hydrogen1Element) {
+        hydrogen1Element.textContent = formatNumber(hydrogen1);
+    } else {
+        console.error("Element #hydrogen1-count not found!");
     const hydrogen2Element = document.getElementById('hydrogen2-count');
     const hydrogen3Element = document.getElementById('hydrogen3-count');
 
-    if (hydrogen1Element) hydrogen1Element.textContent = hydrogen1.toFixed(1);
     if (hydrogen2Element) hydrogen2Element.textContent = hydrogen2.toFixed(1);
     if (hydrogen3Element) hydrogen3Element.textContent = hydrogen3.toFixed(1);
 
