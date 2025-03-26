@@ -55,8 +55,8 @@ function updateGeneratorTable() {
             .map((gen, i) => `
                 <tr>
                     <td>${gen.name}</td>
-                    <td>${gen.cost.toExponential(2)} (1H)</td>
-                    <td>${gen.production.toExponential(2)} (1H/s)</td>
+                    <td>${formatNumber(gen.cost)} (1H)</td>
+                    <td>${formatNumber(gen.production)} (1H/s)</td>
                     <td>${gen.count}</td>
                     <td><button onclick="buyGenerator(${i})">Buy</button></td>
                 </tr>
@@ -72,16 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDisplay();
 });
 
+function formatNumber(num) {
+    if (num < 1_000_000) {
+        return num.toLocaleString(); // Regular format for small numbers
+    } else {
+        return num.toExponential(2); // Scientific notation for large numbers
+    }
+}
 
 function buyGenerator(index) {
+    if (index < 0 || index >= generators.length) {
+        console.error("Invalid generator index:", index);
+        return;
+    }
+
     const generator = generators[index];
+
     if (hydrogen1 >= generator.cost) {
         hydrogen1 -= generator.cost;
         generator.count += 1;
-        generator.cost = Math.ceil(generator.cost * 1.5); // Increase cost for the next generator
+        generator.cost = Math.ceil(generator.cost * 1.5); // Increment cost
         updateDisplay();
+        updateGeneratorTable();
     }
 }
+
 
 
 function produceHydrogen() {
