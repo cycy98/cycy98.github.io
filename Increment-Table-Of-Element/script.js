@@ -189,3 +189,4 @@ document.addEventListener('DOMContentLoaded', () => {
     openTab('generator');
     updateDisplay();
 });
+console.log("Script loaded!")
