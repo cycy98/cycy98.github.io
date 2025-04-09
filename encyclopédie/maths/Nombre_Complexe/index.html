@@ -19,7 +19,8 @@
                         <li><a href="#subsection2-3">Multiplication</a></li>
                         <li><a href="#subsection2-4">Division</a></li>
                         <li><a href="#subsection2-5">Conjugaison</a></li>
-                        <li><a href="#subsection2-5">Ordre</a></li>
+                        <li><a href="#subsection2-6">Ordre</a></li>
+                        <li><a href="#subsection2-7">Trigonométrie</a></li>
                     </ul>
                 </li>
                 <li><a href="#section3">Section 3</a></li>
@@ -95,6 +96,18 @@
                         Si on défini \(i<0\), alors \(ii>0i\) donc \(-1>0\) aussi. <br>
                         Et si \(i=0\), alors \(ii=0i\) donc \(-1=0\)
                         Aucune des conclusions sont vrais, donc l'ordre n'existe pas.
+                    </p>
+                </section>
+                <section id="subsection2-7">
+                    <h3>Trigonométrie</h3>
+                    <p>
+                        La formule d'Euler \(e^{iz}=\cos(z)+i\sin(z)\) défini la trigonométrie pour les nombre complexes. D'après les propriété de la trigonométrie : <br>
+                        \[e^{-iz}=\cos(-z)+i\sin(-z)=e^{-iz}=\cos(z)-i\sin(z)\]
+                        La deuxième égalité est juste car le cosinus est une fonction pair, et le sinus une fonction impaire.
+                        En faisant la somme des deux \(e^{-iz}+\e^{iz}=\cos(z)+\xout{i\sin(z)}+\cos(z)-\xout{i\sin(z)}=2\cos(z)\). <br>
+                        Ce qui donne \(\cos(z)=\frac{e^{iz}+e^{-iz}}{2}\). <br>
+                        En faisant la différence des deux \(e^{-iz}-\e^{iz}=\xout{\cos(z)}+i\sin(z)-(\xout{\cos(z)}-i\sin(z))=2i\sin(z)\). <br>
+                        Ce qui donne \(\sin(z)=\frac{e^{iz}-e^{-iz}}{2i}\).
                     </p>
                 </section>
             </section>
