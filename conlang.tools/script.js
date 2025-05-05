@@ -1,67 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const lexiconTableBody = document.querySelector('#lexicon-table tbody');
-    const addWordBtn = document.querySelector('#add-word-btn');
-    const applyRulesBtn = document.querySelector('#apply-rules-btn');
-    const soundRulesTextarea = document.querySelector('#sound-rules');
-    const evolvedWordsList = document.querySelector('#evolved-words');
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text */
+}
 
-    const lexicon = []; // Array to store lexicon entries
+header {
+    background: #1e1e1e;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
 
-    // Add Word to Lexicon
-    addWordBtn.addEventListener('click', () => {
-        const word = prompt('Enter a word:');
-        const definition = prompt('Enter a definition:');
-        const partOfSpeech = prompt('Enter part of speech:');
+#editor-container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+}
 
-        if (word && definition && partOfSpeech) {
-            lexicon.push({ word, definition, partOfSpeech });
-            updateLexiconTable();
-        }
-    });
+#code-editor {
+    height: 500px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
 
-    // Update Lexicon Table
-    function updateLexiconTable() {
-        lexiconTableBody.innerHTML = '';
-        lexicon.forEach((entry, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${entry.word}</td>
-                <td>${entry.definition}</td>
-                <td>${entry.partOfSpeech}</td>
-                <td><button data-index="${index}" class="delete-word-btn">Delete</button></td>
-            `;
-            lexiconTableBody.appendChild(row);
-        });
+button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-        // Add event listeners for delete buttons
-        document.querySelectorAll('.delete-word-btn').forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                const index = e.target.dataset.index;
-                lexicon.splice(index, 1);
-                updateLexiconTable();
-            });
-        });
-    }
-
-    // Apply Sound Change Rules
-    applyRulesBtn.addEventListener('click', () => {
-        const rules = soundRulesTextarea.value.split('\n'); // Each rule on a new line
-        evolvedWordsList.innerHTML = '';
-
-        lexicon.forEach((entry) => {
-            let evolvedWord = entry.word;
-            rules.forEach((rule) => {
-                const [from, to] = rule.split('->').map((s) => s.trim());
-                if (from && to) {
-                    const regex = new RegExp(from, 'g');
-                    evolvedWord = evolvedWord.replace(regex, to);
-                }
-            });
-
-            // Add evolved word to results
-            const li = document.createElement('li');
-            li.textContent = `${entry.word} -> ${evolvedWord}`;
-            evolvedWordsList.appendChild(li);
-        });
-    });
-});
+button:hover {
+    background: #0056b3;
+}
