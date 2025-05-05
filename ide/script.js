@@ -30,6 +30,30 @@ function runCode() {
     }
   }
 
+  function runBlock(startIndex) {
+  const blockLines = [];
+  let depth = 0;
+
+  for (let j = startIndex + 1; j < lines.length; j++) {
+    const line = lines[j].trim();
+
+    if (line === '{') {
+      depth++;
+    } else if (line === '}') {
+      if (depth === 0) {
+        // End of the block
+        break;
+      }
+      depth--;
+    }
+
+    if (depth > 0 || (line !== '{' && line !== '}')) {
+      blockLines.push(line);
+    }
+  }
+
+  return blockLines;
+}
   function tokenize(line) {
     const tokens = [];
     let currentToken = '';
