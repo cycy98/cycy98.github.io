@@ -30,76 +30,70 @@ function runCode() {
     }
   }
 
-  function runBlock(startIndex) {
-    let blockLines = [];
-    let depth = 0;
-    for (let j = startIndex; j < lines.length; j++) {
-      let line = lines[j].trim();
-      if (line === '{') {
-        if (depth++ === 0) continue;
+  function tokenize(line) {
+    const tokens = [];
+    let currentToken = '';
+    let inQuotes = false;
+
+    for (let char of line) {
+      if (char === '"' || char === "'") {
+        inQuotes = !inQuotes; // Toggle inQuotes state
+        currentToken += char;
+        continue;
       }
-      if (line === '}') {
-        if (--depth === 0) break;
+
+      if (char === ' ' && !inQuotes) {
+        if (currentToken) tokens.push(currentToken);
+        currentToken = '';
+      } else {
+        currentToken += char;
       }
-      if (depth > 0) blockLines.push(line);
     }
-    return blockLines;
-  }
 
-  function isLineIgnorable(line) {
-    return line === '' || line.startsWith('//') || line.startsWith('#');
-  }
-
-  function isSemicolonRequired(line) {
-    const trimmed = line.trim();
-    if (trimmed === '' || trimmed.endsWith(';') || trimmed.endsWith('{') || trimmed.endsWith('}') || trimmed.startsWith('if') || trimmed.startsWith('elif') || trimmed.startsWith('else')) return false;
-    const quotes = [...trimmed.matchAll(/["']/g)];
-    return quotes.length % 2 === 0; // even number of quotes
+    if (currentToken) tokens.push(currentToken);
+    return tokens;
   }
 
   function executeLine(line) {
     line = line.trim();
-    if (isLineIgnorable(line)) return;
-    if (isSemicolonRequired(line)) {
-      output.push(`Syntax Error: Missing semicolon -> "${line}"`);
-      return;
-    }
+    if (line === '' || line.startsWith('//') || line.startsWith('#')) return;
 
-    if (line.endsWith(';')) line = line.slice(0, -1);
+    const tokens = tokenize(line);
 
-    const decl = line.match(/^(int|str|bool)\s+(\w+)\s*=\s*(.+)$/);
-    if (decl) {
-      const [, type, name, valueRaw] = decl;
-      let value = valueRaw.trim();
+    // Handle declarations
+    if (['int', 'str', 'bool'].includes(tokens[0])) {
+      const [, type, name, valueRaw] = tokens;
+      let value = valueRaw;
       if (type === 'int') variables[name] = parseInt(value);
       else if (type === 'bool') variables[name] = value === 'true';
       else if (type === 'str') {
         const match = value.match(/^\"(.*)\"$/);
         if (match) variables[name] = match[1];
-        else output.push(`Invalid string value -> "${line}"`);
+        else output.push(`<span class="error">Invalid string value -> "${line}"</span>`);
       }
       return;
     }
 
-    const printMatch = line.match(/^print\((.+)\)$/);
-    if (printMatch) {
-      let val = printMatch[1].trim();
+    // Handle print
+    if (tokens[0] === 'print') {
+      const val = tokens.slice(1).join(' ').trim();
       if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-        print(val.slice(1, -1));
+        print(`<span class="string">${val.slice(1, -1)}</span>`);
       } else if (variables.hasOwnProperty(val)) {
-        print(variables[val]);
+        print(`<span class="variable">${variables[val]}</span>`);
       } else {
-        output.push(`Reference Error: '${val}' is not defined`);
+        output.push(`<span class="error">Reference Error: '${val}' is not defined</span>`);
       }
       return;
     }
 
-    output.push(`Syntax Error: Unknown command -> "${line}"`);
+    // Handle unknown commands
+    output.push(`<span class="error">Syntax Error: Unknown command -> "${line}"</span>`);
   }
 
   while (i < lines.length) {
-    let line = lines[i].trim();
-    if (isLineIgnorable(line)) {
+    const line = lines[i].trim();
+    if (line === '' || line.startsWith('//') || line.startsWith('#')) {
       i++;
       continue;
     }
