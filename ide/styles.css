@@ -32,7 +32,6 @@ pre#output {
   white-space: pre-wrap;
   border-left: 4px solid #61dafb;
 }
-
 .keyword {
   color: #ff79c6;
 }
@@ -41,6 +40,14 @@ pre#output {
   color: #f1fa8c;
 }
 
-.function {
+.error {
+  color: #ff5555;
+}
+
+.variable {
   color: #8be9fd;
+}
+
+.number {
+  color: #bd93f9;
 }
