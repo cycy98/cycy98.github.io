@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conlang Utilities</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Conlang Utilities</h1>
+    </header>
+    <main>
+        <section id="lexicon-manager">
+            <h2>Lexicon Manager</h2>
+            <div id="lexicon-table-container">
+                <table id="lexicon-table">
+                    <thead>
+                        <tr>
+                            <th>Word</th>
+                            <th>Definition</th>
+                            <th>Part of Speech</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Lexicon entries will be dynamically populated -->
+                    </tbody>
+                </table>
+                <button id="add-word-btn">Add Word</button>
+            </div>
+        </section>
+
+        <section id="auto-evolve">
+            <h2>Auto-Evolve System</h2>
+            <textarea id="sound-rules" placeholder="Define sound change rules here..."></textarea>
+            <button id="apply-rules-btn">Apply Rules</button>
+            <div id="evolution-results">
+                <h3>Results</h3>
+                <ul id="evolved-words">
+                    <!-- Evolved words will be displayed here -->
+                </ul>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
