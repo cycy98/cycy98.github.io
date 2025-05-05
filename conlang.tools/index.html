@@ -3,46 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Utilities</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Conlang Code Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        #editor-container {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        #code-editor {
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Conlang Utilities</h1>
+        <h1>Conlang Code Editor</h1>
     </header>
-    <main>
-        <section id="lexicon-manager">
-            <h2>Lexicon Manager</h2>
-            <div id="lexicon-table-container">
-                <table id="lexicon-table">
-                    <thead>
-                        <tr>
-                            <th>Word</th>
-                            <th>Definition</th>
-                            <th>Part of Speech</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Lexicon entries will be dynamically populated -->
-                    </tbody>
-                </table>
-                <button id="add-word-btn">Add Word</button>
-            </div>
-        </section>
+    <div id="editor-container">
+        <textarea id="code-editor"></textarea>
+        <button id="parse-button">Parse Code</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    <script>
+        // Initialize CodeMirror Editor
+        const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
+            mode: 'javascript', // Temporary mode, will be replaced with a custom mode
+            lineNumbers: true,
+            theme: 'default',
+            tabSize: 4,
+        });
 
-        <section id="auto-evolve">
-            <h2>Auto-Evolve System</h2>
-            <textarea id="sound-rules" placeholder="Define sound change rules here..."></textarea>
-            <button id="apply-rules-btn">Apply Rules</button>
-            <div id="evolution-results">
-                <h3>Results</h3>
-                <ul id="evolved-words">
-                    <!-- Evolved words will be displayed here -->
-                </ul>
-            </div>
-        </section>
-    </main>
-    <script src="script.js"></script>
+        // Button to handle parsing (example functionality)
+        document.getElementById('parse-button').addEventListener('click', () => {
+            const code = editor.getValue();
+            console.log('Code to parse:', code);
+            alert('Parsing is not implemented yet!');
+        });
+    </script>
 </body>
 </html>
