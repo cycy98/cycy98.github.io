@@ -1,3 +1,29 @@
+// Define Custom Language Mode
+CodeMirror.defineMode("customLang", function() {
+  return {
+    token: function(stream) {
+      if (stream.match(/\/\/.*/)) {
+        return "comment";
+      }
+      if (stream.match(/"(?:[^\\"]|\\.)*"?/)) {
+        return "string";
+      }
+      if (stream.match(/\b(int|str|bool|if|elif|else|print|true|false)\b/)) {
+        return "keyword";
+      }
+      if (stream.match(/\b\d+\b/)) {
+        return "number";
+      }
+      if (stream.match(/\b[a-zA-Z_]\w*\b/)) {
+        return "variable";
+      }
+
+      stream.next();
+      return null;
+    }
+  };
+});
+
 // Initialize CodeMirror
 const editor = CodeMirror(document.getElementById('codeEditor'), {
   value: `// Sample program
@@ -12,7 +38,7 @@ if (x == 5) {
 } else {
   print(name);
 }`,
-  mode: "javascript",
+  mode: "customLang",
   lineNumbers: true,
   theme: "default",
   indentUnit: 4,
@@ -21,7 +47,7 @@ if (x == 5) {
 
 // Main Function to Run Code
 function runCode() {
-  const code = editor.getValue(); // Get code from CodeMirror editor
+  const code = editor.getValue();
   const lines = code.split('\n');
   const output = [];
   const variables = {};
@@ -63,7 +89,6 @@ function runCode() {
         depth++;
       } else if (line === '}') {
         if (depth === 0) {
-          // End of the block
           break;
         }
         depth--;
@@ -84,7 +109,7 @@ function runCode() {
 
     for (let char of line) {
       if (char === '"' || char === "'") {
-        inQuotes = !inQuotes; // Toggle inQuotes state
+        inQuotes = !inQuotes;
         currentToken += char;
         continue;
       }
