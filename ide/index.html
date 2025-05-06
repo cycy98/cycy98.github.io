@@ -8,14 +8,74 @@
   <link rel="stylesheet" href="theme.css">
 </head>
 <body>
-  <h1>Custom Language v3</h1>
-  <div id="codeEditor"></div>
-  </textarea>
+  <h2>Custom Language IDE</h2>
+  <div id="codeEditor" style="height: 200px; border: 1px solid #ccc;"></div>
   <br>
   <button onclick="runCode()">Run</button>
   <pre id="output"></pre>
+
+  <!-- Load CodeMirror & Pyodide -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"></script>
-  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/python/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+
+  <script>
+    let editor = CodeMirror(document.getElementById("codeEditor"), {
+      value: 'x = 10\nprint(x)',
+      mode: "python",
+      lineNumbers: true
+    });
+
+    let pyodideReady = loadPyodide();
+
+    async function runCode() {
+      const pyodide = await pyodideReady;
+      const userCode = editor.getValue();
+
+      const interpreterCode = `
+variables = {}
+
+def parse_expression(expr):
+    expr = expr.strip()
+    for var in variables:
+        expr = expr.replace(var, repr(variables[var]))
+    try:
+        return eval(expr)
+    except Exception as e:
+        return f"Error: {e}"
+
+def run_code(code):
+    global variables
+    variables = {}
+    output = []
+    lines = code.strip().split('\\n')
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            if line.startswith("print(") and line.endswith(")"):
+                inner = line[6:-1]
+                value = parse_expression(inner)
+                output.append(str(value))
+            elif "=" in line and "==" not in line:
+                name, value = line.split("=", 1)
+                name = name.strip()
+                value = parse_expression(value)
+                variables[name] = value
+            else:
+                output.append(f"Syntax error: {line}")
+        except Exception as e:
+            output.append(f"Error: {e}")
+    return "\\n".join(output)
+
+run_code("""${userCode}""")
+      `;
+
+      const result = await pyodide.runPythonAsync(interpreterCode);
+      document.getElementById("output").innerText = result;
+    }
+  </script>
 </body>
 </html>
+
