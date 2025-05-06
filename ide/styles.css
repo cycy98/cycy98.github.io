@@ -5,16 +5,6 @@ body {
   padding: 20px;
 }
 
-textarea {
-  width: 100%;
-  height: 300px;
-  background: #1e1e1e;
-  color: #ffffff;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-}
-
 button {
   margin-top: 10px;
   padding: 10px 20px;
@@ -23,6 +13,15 @@ button {
   color: #61dafb;
   border: none;
   cursor: pointer;
+}
+#editor-container {
+  border: 1px solid #ccc;
+  height: 300px;
+  margin-bottom: 10px;
+}
+
+.CodeMirror {
+  height: 100%;
 }
 
 pre#output {
