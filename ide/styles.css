@@ -35,19 +35,15 @@ pre#output {
 .keyword {
   color: #ff79c6;
 }
-
 .string {
   color: #f1fa8c;
 }
-
-.error {
-  color: #ff5555;
+.number {
+  color: #bd93f9;
 }
-
 .variable {
   color: #8be9fd;
 }
-
-.number {
-  color: #bd93f9;
+.comment {
+  color: #6272a4;
 }
