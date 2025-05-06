@@ -23,7 +23,8 @@
     let editor = CodeMirror(document.getElementById("codeEditor"), {
       value: 'x = 10\nprint(x)',
       mode: "python",
-      lineNumbers: true
+      lineNumbers: true,
+      theme: 'custom-dark'
     });
 
     let pyodideReady = loadPyodide();
