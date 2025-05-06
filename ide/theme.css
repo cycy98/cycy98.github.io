@@ -1,0 +1,49 @@
+/* Base Theme Background and Text */
+.cm-s-custom-dark.CodeMirror {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* Gutter (line numbers) */
+.cm-s-custom-dark .CodeMirror-gutters {
+  background: #1e1e1e;
+  color: #888;
+  border: none;
+}
+
+/* Current line */
+.cm-s-custom-dark .CodeMirror-activeline-background {
+  background: #1f1f1f;
+}
+
+/* Cursor */
+.cm-s-custom-dark .CodeMirror-cursor {
+  border-left: 1px solid #61dafb;
+}
+
+/* Syntax Highlighting */
+.cm-s-custom-dark .cm-keyword {
+  color: #ff79c6;
+}
+
+.cm-s-custom-dark .cm-string {
+  color: #f1fa8c;
+}
+
+.cm-s-custom-dark .cm-number {
+  color: #bd93f9;
+}
+
+.cm-s-custom-dark .cm-variable {
+  color: #8be9fd;
+}
+
+.cm-s-custom-dark .cm-comment {
+  color: #6272a4;
+  font-style: italic;
+}
+
+.cm-s-custom-dark .cm-error {
+  color: #ff5555;
+  text-decoration: underline;
+}
