@@ -1,5 +1,27 @@
+// Initialize CodeMirror
+const editor = CodeMirror(document.getElementById('codeEditor'), {
+  value: `// Sample program
+int x = 5;
+bool valid = true;
+str name = "Alex";
+
+if (x == 5) {
+  print("x is 5");
+} elif (valid == false) {
+  print("invalid");
+} else {
+  print(name);
+}`,
+  mode: "javascript",
+  lineNumbers: true,
+  theme: "default",
+  indentUnit: 4,
+  matchBrackets: true
+});
+
+// Main Function to Run Code
 function runCode() {
-  const code = document.getElementById('code').value;
+  const code = editor.getValue(); // Get code from CodeMirror editor
   const lines = code.split('\n');
   const output = [];
   const variables = {};
@@ -31,29 +53,30 @@ function runCode() {
   }
 
   function runBlock(startIndex) {
-  const blockLines = [];
-  let depth = 0;
+    const blockLines = [];
+    let depth = 0;
 
-  for (let j = startIndex + 1; j < lines.length; j++) {
-    const line = lines[j].trim();
+    for (let j = startIndex + 1; j < lines.length; j++) {
+      const line = lines[j].trim();
 
-    if (line === '{') {
-      depth++;
-    } else if (line === '}') {
-      if (depth === 0) {
-        // End of the block
-        break;
+      if (line === '{') {
+        depth++;
+      } else if (line === '}') {
+        if (depth === 0) {
+          // End of the block
+          break;
+        }
+        depth--;
       }
-      depth--;
+
+      if (depth > 0 || (line !== '{' && line !== '}')) {
+        blockLines.push(line);
+      }
     }
 
-    if (depth > 0 || (line !== '{' && line !== '}')) {
-      blockLines.push(line);
-    }
+    return blockLines;
   }
 
-  return blockLines;
-}
   function tokenize(line) {
     const tokens = [];
     let currentToken = '';
@@ -93,7 +116,7 @@ function runCode() {
       else if (type === 'str') {
         const match = value.match(/^\"(.*)\"$/);
         if (match) variables[name] = match[1];
-        else output.push(`<span class="error">Invalid string value -> "${line}"</span>`);
+        else output.push(`Invalid string value -> "${line}"`);
       }
       return;
     }
@@ -102,17 +125,17 @@ function runCode() {
     if (tokens[0] === 'print') {
       const val = tokens.slice(1).join(' ').trim();
       if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-        print(`<span class="string">${val.slice(1, -1)}</span>`);
+        print(val.slice(1, -1));
       } else if (variables.hasOwnProperty(val)) {
-        print(`<span class="variable">${variables[val]}</span>`);
+        print(variables[val]);
       } else {
-        output.push(`<span class="error">Reference Error: '${val}' is not defined</span>`);
+        output.push(`Reference Error: '${val}' is not defined`);
       }
       return;
     }
 
     // Handle unknown commands
-    output.push(`<span class="error">Syntax Error: Unknown command -> "${line}"</span>`);
+    output.push(`Syntax Error: Unknown command -> "${line}"`);
   }
 
   while (i < lines.length) {
