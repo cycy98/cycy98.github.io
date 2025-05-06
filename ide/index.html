@@ -9,8 +9,9 @@
 </head>
 <body>
   <h2>Custom Language IDE</h2>
-  <div id="codeEditor" style="height: 200px; border: 1px solid #ccc;"></div>
-  <br>
+  <div id="editor-container">
+    <div id="codeEditor"></div>
+  </div>
   <button onclick="runCode()">Run</button>
   <pre id="output"></pre>
 
@@ -23,8 +24,7 @@
     let editor = CodeMirror(document.getElementById("codeEditor"), {
       value: 'x = 10\nprint(x)',
       mode: "python",
-      lineNumbers: true,
-      theme: 'custom-dark'
+      lineNumbers: true
     });
 
     let pyodideReady = loadPyodide();
