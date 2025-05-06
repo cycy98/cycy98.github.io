@@ -48,7 +48,7 @@ if (x == 5) {
 // Main Function to Run Code
 function runCode() {
   const code = editor.getValue();
-  const lines = code.split('\n');
+  const lines = codeEditor.split('\n');
   const output = [];
   const variables = {};
   let i = 0;
