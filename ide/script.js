@@ -26,7 +26,7 @@ CodeMirror.defineMode("customLang", function() {
 
 // Initialize CodeMirror
 const editor = CodeMirror(document.getElementById('codeEditor'), {
-  value: `// Sample program
+  value: `
 int x = 5;
 bool valid = true;
 str name = "Alex";
@@ -48,7 +48,7 @@ if (x == 5) {
 // Main Function to Run Code
 function runCode() {
   const code = editor.getValue();
-  const lines = codeEditor.split('\n');
+  const lines = code.split('\n');
   const output = [];
   const variables = {};
   let i = 0;
