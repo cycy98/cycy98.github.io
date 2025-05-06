@@ -40,7 +40,7 @@ if (x == 5) {
 }`,
   mode: "customLang",
   lineNumbers: true,
-  theme: "default",
+  theme: "theme",
   indentUnit: 4,
   matchBrackets: true
 });
