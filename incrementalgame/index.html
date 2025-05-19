@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incremental Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Incremental Empire</h1>
+    <div class="resource-display">
+      <h2>Coins: <span id="coins">0</span></h2>
+    </div>
+
+    <button id="clicker" class="click-btn">Click Me! +1</button>
+
+    <div class="shop">
+      <h3>Upgrades</h3>
+      <div class="item">
+        <span>Worker (+1/sec)</span>
+        <button onclick="buyWorker()">Buy (Cost: <span id="workerCost">10</span>)</button>
+        <span>Owned: <span id="workers">0</span></span>
+      </div>
+
+      <div class="item">
+        <span>Click Power x2</span>
+        <button onclick="upgradeClickPower()">Upgrade (Cost: <span id="clickUpgradeCost">50</span>)</button>
+        <span>Level: <span id="clickPowerLevel">1</span></span>
+      </div>
+    </div>
+
+    <div class="prestige-section">
+      <h3>Prestige</h3>
+      <button onclick="prestige()">Prestige (Reset for bonus if coins ≥ 1000)</button>
+      <p>Prestige Bonus: <span id="prestigeBonus">1x</span></p>
+    </div>
+
+    <button onclick="saveGame()">💾 Save</button>
+    <button onclick="loadGame()">📂 Load</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
