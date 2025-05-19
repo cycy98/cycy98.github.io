@@ -1,0 +1,39 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #1e1e1e;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: #2e2e2e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #000;
+}
+
+.click-btn {
+  font-size: 1.5rem;
+  padding: 15px 30px;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.shop, .prestige-section {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  background: #3e3e3e;
+  padding: 10px;
+  border-radius: 5px;
+}
