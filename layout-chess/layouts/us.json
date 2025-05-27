@@ -1,7 +1,7 @@
 {
   "name": "qwerty-us",
   "description": "American QWERTY layout",
-  "geometry": "ansi",
+  "geometry": "iso",
   "keymap": {
     "Digit1": [ "1", "!" ],
     "Digit2": [ "2", "@" ],
@@ -48,7 +48,7 @@
     "BracketLeft": [ "[", "{" ],
     "BracketRight": [ "]", "}" ],
     "Quote": [ "'", "\"" ],
-    "Backquote": [ "*₀", "*⁰" ],
+    "Backquote": [ "*₀", "⁰" ],
     "Backslash": [ "\\", "|" ],
     "Space": [ " ", " " ]
   },
