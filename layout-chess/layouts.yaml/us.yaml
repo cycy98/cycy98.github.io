@@ -1,6 +1,6 @@
 name: qwerty-us
 description: American QWERTY layout
-geometry: ANSI
+geometry: ISO
 
 base: |
   ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┲━━━━━━━━━━┓
