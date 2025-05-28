@@ -1,6 +1,6 @@
 {
-  "name": "qwerty-us",
-  "description": "American QWERTY layout",
+  "name": "ches",
+  "description": "tried to do a layout",
   "geometry": "iso",
   "keymap": {
     "Digit1": [ "1", "~" ], 
