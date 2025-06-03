@@ -2,3 +2,47 @@ body {
   background-color: #303030;
   color: white;
 }
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #0074D9;
+  background: #f4f4f4;
+  padding: 0.5em 1em;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  outline: none;
+  margin-right: 1.5em;
+  padding: 0.5em 1em;
+  font-size: 1.1em;
+  color: #0074D9;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border 0.2s, color 0.2s;
+}
+
+.tab-btn.active {
+  color: #222;
+  border-bottom: 2px solid #0074D9;
+  font-weight: bold;
+  background: #fff;
+}
+
+.tab-content {
+  display: none;
+  padding: 2em 1em 1em 1em;
+  background: #fff;
+  border: 1px solid #eee;
+  border-top: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
