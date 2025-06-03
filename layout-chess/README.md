@@ -31,7 +31,8 @@ To type extra characters on the ches layout, you usually type `AltGr` or `Ctrl+A
 - `AltGr + T` then `Shift + T` = Þ
 - `AltGr + S` = ß
 - `AltGr + G` then `AltGr + S` = ς
-- `AltGr + D` then `W` then `Shift + C` = ↦ <br>
+- `AltGr + D` then `W` then `Shift + C` = ↦
+
 Not all combos follow a strict rule — the best way to learn is to experiment on the layout viewer.
 ## Why this specific layout?
 Most used letter in both French and English are group what would be in QWERTY between the E key and the M key, it also includes various accents, the greek alphabet, math symbols, sub/superscript numbers and letters, en and em dashes.
