@@ -21,7 +21,7 @@ This component uses [X-Keyoard](https://github.com/OneDeadKey/x-keyboard/tree/ma
 
 # FAQ
 ## Why chess in the URL
-It’s just a typo I realized after sharing the link. It’s meant to be “ches,” not related to the game. For now, the name stays as is.
+It’s just a typo I realized after sharing the link. It’s meant to be “ches”, not related to the game. For now, the name stays as is.
 ## Why doesn’t this work my mobile/phone/tablet?
 The site relies on your physical keyboard to detect input. Since phones and tablets don’t have one, the layout won’t function there.
 ## Is there a dark mode?
