@@ -25,7 +25,7 @@ const symbols = {
   '*˛': '◌\u0328', // ogonek
   '*b': '𝕓', // balckboard bold
   "*I": "𝐼", // italic
-  '*g': '𝐠'
+  '*g': '𝐠', // bold
   // special keys, represented by a smaller single character
   // '*/': stroke   (no special glyph needed)
   // '*µ': greek    (no special glyph needed)
