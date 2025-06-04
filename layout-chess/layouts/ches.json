@@ -51,7 +51,7 @@
     "Backquote": [ "*₀", "*⁰","†","‡" ],
     "Backslash": [ ",", ".","*˙" ],
     "IntlBackslash": [ "<", ">", "«", "»" ],
-    "Space": [ " ", " " ]
+    "Space": [ " ", "\u00a0","\u200b" ]
   },
   "deadkeys": {
     "*₀": {
