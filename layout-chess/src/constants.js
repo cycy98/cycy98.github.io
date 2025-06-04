@@ -2,10 +2,10 @@
  * Styling: colors & dimensions
  */
 
-export const KEY_BG         = '#f8f8f8';
-export const SPECIAL_KEY_BG = '#e4e4e4';
-export const KEY_COLOR      = '#333';
-export const KEY_COLOR_L3   = 'blue';
+export const KEY_BG         = '#040404';
+export const SPECIAL_KEY_BG = '#1b1b1b';
+export const KEY_COLOR      = '#ccc';
+export const KEY_COLOR_L3   = 'cyan';
 export const KEY_COLOR_L5   = 'green';
 export const DEAD_KEY_COLOR = 'red';
 
