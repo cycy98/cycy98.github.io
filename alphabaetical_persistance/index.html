@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alphabetical Persistence Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { font-size: 1em; margin: 5px; }
+    #result { margin-top: 20px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h2>Alphabetical Persistence Calculator</h2>
+  <p>Enter a number (up to 999 sextillion):</p>
+  <input type="text" id="numberInput" maxlength="21">
+  <button onclick="calculatePersistence()">Calculate</button>
+  <div id="result"></div>
+
+  <script>
+    const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+                   "sixteen", "seventeen", "eighteen", "nineteen"];
+    const tens = ["", "", "twenty", "thirty", "forty", "fifty",
+                  "sixty", "seventy", "eighty", "ninety"];
+    const scales = ["", "thousand", "million", "billion", "trillion",
+                    "quadrillion", "quintillion", "sextillion"];
+
+    function convertHundreds(n) {
+      n = parseInt(n);
+      let word = "";
+
+      if (n >= 100) {
+        word += ones[Math.floor(n / 100)] + " hundred";
+        n %= 100;
+        if (n > 0) word += " and ";
+      }
+
+      if (n >= 20) {
+        word += tens[Math.floor(n / 10)];
+        n %= 10;
+        if (n > 0) word += "-" + ones[n];
+      } else if (n >= 10) {
+        word += teens[n - 10];
+      } else if (n > 0) {
+        word += ones[n];
+      }
+
+      return word;
+    }
+
+    function numberToWords(numStr) {
+      if (numStr === "0") return "zero";
+
+      // Pad with leading zeros to make length a multiple of 3
+      while (numStr.length % 3 !== 0) {
+        numStr = "0" + numStr;
+      }
+
+      let words = [];
+      let groups = numStr.match(/.{3}/g); // split into groups of 3 digits
+
+      for (let i = 0; i < groups.length; i++) {
+        let groupNum = parseInt(groups[i]);
+        if (groupNum === 0) continue;
+
+        let groupWord = convertHundreds(groups[i]);
+        let scaleIndex = groups.length - 1 - i;
+        let scale = scales[scaleIndex];
+
+        if (scale) groupWord += " " + scale;
+        words.push(groupWord);
+      }
+
+      return words.join(" ");
+    }
+
+    function cleanWord(word) {
+      return word.replace(/[\s-]/g, "");
+    }
+
+    function calculatePersistence() {
+      let input = document.getElementById("numberInput").value.trim();
+      if (!/^\d+$/.test(input)) {
+        document.getElementById("result").innerText = "Please enter a valid positive integer.";
+        return;
+      }
+
+      if (input.length > 21) {
+        document.getElementById("result").innerText = "Number too large. Max is 999 sextillion.";
+        return;
+      }
+
+      let steps = [];
+      let n = input;
+      let stepCount = 0;
+
+      while (n !== "4") {
+        let word = numberToWords(n);
+        let cleaned = cleanWord(word);
+        let length = cleaned.length.toString();
+        steps.push(`Step ${stepCount}: ${n} → "${word}" → ${length}`);
+        n = length;
+        stepCount++;
+      }
+
+      steps.push(`Step ${stepCount}: 4 → "four" → 4`);
+      steps.push(`\nPersistence: ${stepCount}`);
+
+      document.getElementById("result").innerText = steps.join("\n");
+    }
+  </script>
+</body>
+</html>
