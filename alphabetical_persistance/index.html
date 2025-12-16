@@ -11,8 +11,8 @@
 </head>
 <body>
   <h2>Alphabetical Persistence Calculator</h2>
-  <p>Enter a number (up to 999 sextillion):</p>
-  <input type="text" id="numberInput" maxlength="21">
+  <p>Enter a number (up to 999 vigintillion):</p>
+  <input type="text" id="numberInput" maxlength="66">
   <button onclick="calculatePersistence()">Calculate</button>
   <div id="result"></div>
 
@@ -22,8 +22,14 @@
                    "sixteen", "seventeen", "eighteen", "nineteen"];
     const tens = ["", "", "twenty", "thirty", "forty", "fifty",
                   "sixty", "seventy", "eighty", "ninety"];
-    const scales = ["", "thousand", "million", "billion", "trillion",
-                    "quadrillion", "quintillion", "sextillion"];
+    // Extended scales up through vigintillion (10^63)
+    const scales = [
+      "", "thousand", "million", "billion", "trillion",
+      "quadrillion", "quintillion", "sextillion", "septillion", "octillion",
+      "nonillion", "decillion", "undecillion", "duodecillion", "tredecillion",
+      "quattuordecillion", "quindecillion", "sexdecillion", "septendecillion",
+      "octodecillion", "novemdecillion", "vigintillion"
+    ];
 
     function convertHundreds(n) {
       n = parseInt(n);
@@ -85,8 +91,9 @@
         return;
       }
 
-      if (input.length > 21) {
-        document.getElementById("result").innerText = "Number too large. Max is 999 sextillion.";
+      // Allow up to 999 vigintillion (3 digits for the leading group + 63 zeros = 66 digits)
+      if (input.length > 66) {
+        document.getElementById("result").innerText = "Number too large. Max is 999 vigintillion.";
         return;
       }
 
