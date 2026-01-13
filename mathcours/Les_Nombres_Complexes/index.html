@@ -23,10 +23,7 @@
       <li><strong>Addition :</strong> \(z_1 + z_2 = (a + c) + (b + d) \color{#00bf00}i\color{#ffffff}\)</li>
       <li><strong>Soustraction :</strong> \(z_1 - z_2 = (a - c) + (b - d) \color{#00bf00}i\color{#ffffff}\)</li>
       <li><strong>Multiplication :</strong> \(z_1 \times z_2 = (ac - bd) + (ad + bc) \color{#00bf00}i\color{#ffffff}\)</li>
-      <li><strong>Division :</strong> \[
-        \frac{z_1}{z_2} = \frac{a + b \color{#00bf00}i\color{#ffffff}}{c + d \color{#00bf00}i\color{#ffffff}}
-        = \frac{(ac + bd) + (bc - ad) \color{#00bf00}i\color{#ffffff}}{c^2 + d^2}
-      \]</li>
+      <li><strong>Division :</strong> \[\n        \frac{z_1}{z_2} = \frac{a + b \color{#00bf00}i\color{#ffffff}}{c + d \color{#00bf00}i\color{#ffffff}}\n        = \frac{(ac + bd) + (bc - ad) \color{#00bf00}i\color{#ffffff}}{c^2 + d^2}\n      \]</li>
     </ul>
     <h3>1.1.2. Forme rectugulaire et polaire</h3>
     Un nombre complexe peut être représenté par sa forme rectangulaire: \[
@@ -44,5 +41,31 @@
     \]
     Ici, \(\arctan\) est en radian, donc un tour complet est \(2\pi\) et non \(360\).
     \(\arctan{\frac{b}{a}}\) est l'<strong>argument</strong> de \(z\), alors que \(\sqrt{a^2+b^2}\) est sa <strong>valeur abosule</strong>.
+
+    <h3>1.1.3. Utiliser les nombres complexes pour la rotation</h3>
+    <p>
+    La multiplication par un nombre complexe de la forme \(e^{\color{#00bf00}i\color{#ffffff}\theta}\) correspond à une rotation du plan complexe d'un angle \(\theta\) autour de l'origine.
+    Si \(z\) représente un point du plan, alors le point \(z'\) obtenu après rotation de \(\theta\) radians est :
+    \[
+      z' = e^{\color{#00bf00}i\color{#ffffff}\theta} \; z.
+    \]
+    En particulier, la multiplication par \(\color{#00bf00}i\color{#ffffff}=e^{\color{#00bf00}i\color{#ffffff}\frac{\pi}{2}}\) effectue une rotation de \(+90^\circ\) (\(+\frac{\pi}{2}\) radians) dans le sens anti-horaire, et par \(e^{-\color{#00bf00}i\color{#ffffff}\frac{\pi}{2}}\) une rotation de \(-90^\circ\).
+    </p>
+    <p>
+    Exemple : si \(z=1+0\color{#00bf00}i\color{#ffffff}\) (le point \((1,0)\)), alors
+    \[
+      z' = e^{\color{#00bf00}i\color{#ffffff}\frac{\pi}{2}}(1) = \color{#00bf00}i\color{#ffffff}
+    \]
+    qui correspond au point \((0,1)\).
+    </p>
+    <p>
+    Pour faire une rotation autour d'un point \(z_0\) qui n'est pas l'origine, on translate d'abord pour ramener \(z_0\) à l'origine, on effectue la rotation, puis on translate de retour :
+    \[
+      z' = (z - z_0) e^{\color{#00bf00}i\color{#ffffff}\theta} + z_0.
+    \]
+    </p>
+    <p>
+    Cette représentation est très pratique en infographie et en géométrie: elle combine la rotation et la dilation (multiplication par \(r e^{\color{#00bf00}i\color{#ffffff}\theta}\) multiplie la distance au centre par \(r\) et effectue une rotation de \(\theta\)).
+    </p>
   </body>
 </html>
