@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>1. Nombres complexes</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  </head>
+  <body>
+    <h1>1. Les Nombres Complexes</h1>
+    <h2>1.1. Définition</h2>
+    Un nombre complexe est un nombre qui est la somme d'un nombre réelle et d'un nombre réelle multiplié par \(\color{#00bf00}i\)
+    (tel que \(\color{#00bf00}i^{\color{#ffffff}2}\color{#ffffff}=-1\)), donc si \(z\) est un nombre complexe, alors:
+    \[z=a+b\times\color{#00bf00}i\color{#ffffff}\]
+    Les nombres complexes sont utilisés en physique, électricité, et la rotation.
+    <h3>1.1.1. Opérations</h3>
+    <p>
+    Soient \(z_1 = a + b \color{#00bf00}i\color{#ffffff}\) et \(z_2 = c + d \color{#00bf00}i\color{#ffffff}\), alors :
+    </p>
+    <ul>
+      <li><strong>Addition :</strong> \(z_1 + z_2 = (a + c) + (b + d) \color{#00bf00}i\color{#ffffff}\)</li>
+      <li><strong>Soustraction :</strong> \(z_1 - z_2 = (a - c) + (b - d) \color{#00bf00}i\color{#ffffff}\)</li>
+      <li><strong>Multiplication :</strong> \(z_1 \times z_2 = (ac - bd) + (ad + bc) \color{#00bf00}i\color{#ffffff}\)</li>
+      <li><strong>Division :</strong> \[
+        \frac{z_1}{z_2} = \frac{a + b \color{#00bf00}i\color{#ffffff}}{c + d \color{#00bf00}i\color{#ffffff}}
+        = \frac{(ac + bd) + (bc - ad) \color{#00bf00}i\color{#ffffff}}{c^2 + d^2}
+      \]</li>
+    </ul>
+    <h3>1.1.2. Forme rectugulaire et polaire</h3>
+    Un nombre complexe peut être représenté par sa forme rectangulaire: \[
+      z=a+b\times\color{#00bf00}i\color{#ffffff}=a+b\color{#00bf00}i\color{#ffffff}
+    \]
+    mais il peut être aussi représenté sous sa forme polaire \[
+    z = r e^{\color{#00bf00}i\color{#ffffff}\theta} =
+    \begin{cases}
+    \sqrt{a^{2}+b^{2}} e^{\color{#00bf00}i\color{#ffffff}\arctan{\frac{b}{a}}} & a > 0 \\
+    \sqrt{a^{2}+b^{2}} e^{\color{#00bf00}i\color{#ffffff}\left(\arctan{\frac{b}{a}} + \pi\right)} & a < 0, b > 0 \\
+    \sqrt{a^{2}+b^{2}} e^{\color{#00bf00}i\color{#ffffff}\left(\arctan{\frac{b}{a}} - \pi\right)} & a < 0, b < 0 \\
+    \sqrt{b^{2}} e^{\color{#00bf00}i\color{#ffffff}\frac{\pi}{2}} & a = 0, b > 0 \\
+    \sqrt{b^{2}} e^{-\color{#00bf00}i\color{#ffffff}\frac{\pi}{2}} & a = 0, b < 0
+    \end{cases}
+    \]
+    Ici, \(\arctan\) est en radian, donc un tour complet est \(2\pi\) et non \(360\).
+    \(\arctan{\frac{b}{a}}\) est l'<strong>argument</strong> de \(z\), alors que \(\sqrt{a^2+b^2}\) est sa <strong>valeur abosule</strong>.
+  </body>
+</html>
