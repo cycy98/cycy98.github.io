@@ -20,7 +20,6 @@ hyphen
 dehyphenated
 numerical
 alphanumerical
-divergant
 asymptote
 recurrence
 induction
