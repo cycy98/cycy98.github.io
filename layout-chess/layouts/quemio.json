@@ -28,7 +28,7 @@
     "KeyP": [ "x", "X" ],
     "KeyA": [ "ü", "Ü" ],
     "BracketLeft": [ "+", "*" ],
-    "BracketRight": [ "#", "\'", "~"],
+    "BracketRight": [ "#", "'", "~"],
 
     "KeyS": [ "d", "D" ],
     "KeyD": [ "j", "j" ],
