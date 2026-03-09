@@ -3,7 +3,7 @@
   "description": "made by bert",
   "geometry": "iso",
   "keymap": {
-	"Backquote": [ "^, °" ],
+    "Backquote": [ "^, °" ],
     "Digit1": [ "1", "!", "¹" ],
     "Digit2": [ "2", "\"", "²" ],
     "Digit3": [ "3", "§", "³" ],
